@@ -30,7 +30,7 @@ public class Admin_user extends User{
 
 
     @Getter @Setter @Column(name = "account_id")
-    private int account_id;
+    private Long account_id;
 
 
 }
