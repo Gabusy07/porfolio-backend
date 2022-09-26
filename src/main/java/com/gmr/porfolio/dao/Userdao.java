@@ -1,10 +1,14 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.User;
+import org.springframework.stereotype.Repository;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 
+import javax.transaction.Transactional;
+import java.sql.SQLException;
+
+@Repository
+@Transactional
 public interface Userdao {
 
 
@@ -12,7 +16,8 @@ public interface Userdao {
 
     void deleteUser(Long id);
 
-    void addUser(User u);
+    void addUser(User u) throws SQLException;
 
-    User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    User getUserData(Long id); //throws NoSuchAlgorithmException, InvalidKeySpecException
+
 }
