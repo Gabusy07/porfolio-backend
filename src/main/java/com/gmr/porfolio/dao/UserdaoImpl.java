@@ -1,70 +1,63 @@
 package com.gmr.porfolio.dao;
 
+import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.sql.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 @Repository
 @Transactional
 public class UserdaoImpl implements Userdao {
 
-
-    Connection connector = DriverManager.getConnection("jdbc:mysql://localhost:3306/porfolio", "root", "S0011245633kap");
-
     @PersistenceContext
     EntityManager em;
 
-    public UserdaoImpl() throws SQLException {
-    }
 
     @Override
-    public void editUser(Long id) {
-
+    public void editUser(Long id, User editedUser) {
+        User u = em.find(User.class, id);
+        em.remove(u);
+        editedUser.setId(id);
+        em.merge(editedUser);
     }
+
 
     @Override
     public void deleteUser(Long id) {
+        User u = em.find(User.class, id);
+        em.remove(u);
 
     }
 
     @Override
-    public void addUser(User u) throws SQLException {
-
-
-        String SQL = "INSERT INTO user( name, lastname, nickname, email, password) "
-                + "VALUES(?,?,?,?,?,?)";
-
-        PreparedStatement pstmt = connector.prepareStatement(SQL,
-                Statement.RETURN_GENERATED_KEYS); {
-
-            pstmt.setString(2, u.getName());
-            pstmt.setString(3, u.getLastname());
-            pstmt.setString(4, u.getNickname());
-            pstmt.setString(5, u.getEmail());
-            pstmt.setString(6, u.getPassword());
-
-
-        };
-
-        pstmt.executeUpdate();
-
-        //System.out.println(u);
-        //em.merge(u); //agregando a DDBB
-
-        connector.close();
+    public void addUser(User u) {
+        //agrega a DDBB
+        em.merge(u);
     }
 
     @Override
-    public User getUserData(Long id) {
+    public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        String query = "FROM User WHERE email= :email";
+        final List list = em.createQuery(query).setParameter("email", u.getEmail())
+                .getResultList();
+
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        User user = (User) list.get(0);
+        String hashedPass = user.getPassword();
+        if (Encrypt.validatePassword(u.getPassword(), hashedPass)) {
+            return user;
+        }
         return null;
-
-
-    }
+      }
 
 }
