@@ -15,17 +15,6 @@ public class Application {
 		SpringApplication.run(Application.class, args
 		);
 
-		User u = new User();
-		u.setId(123777777L);
-		u.setName("peter");
-		u.setLastname("lui");
-		u.setEmail("ghhhhb@gmail.com");
-		u.setNickname("mihhhhhhfiu");
-		u.setPassword("dfgjmfqqqqqv,");
-		UserController action = new UserController();
-		action.addUser(u);
-
-
 	}
 
 }
