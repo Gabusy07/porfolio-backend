@@ -20,6 +20,6 @@ public interface Userdao {
 
     void addUser(User u) throws SQLException;
 
-    User getUserData(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 }
