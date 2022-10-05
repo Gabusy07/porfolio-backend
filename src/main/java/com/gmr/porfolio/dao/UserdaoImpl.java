@@ -1,6 +1,5 @@
 package com.gmr.porfolio.dao;
 
-import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
 
@@ -17,15 +16,19 @@ import java.util.List;
 public class UserdaoImpl implements Userdao {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
+
 
 
     @Override
     public void editUser(Long id, User editedUser) {
         User u = em.find(User.class, id);
-        em.remove(u);
-        editedUser.setId(id);
-        em.merge(editedUser);
+        u.setName(editedUser.getName());
+        u.setLastname(editedUser.getLastname());
+        u.setNickname(editedUser.getNickname());
+        u.setEmail(editedUser.getEmail());
+        u.setPassword(editedUser.getPassword());
+        em.merge(u);
     }
 
 
@@ -43,21 +46,16 @@ public class UserdaoImpl implements Userdao {
     }
 
     @Override
-    public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String query = "FROM User WHERE email= :email";
-        final List list = em.createQuery(query).setParameter("email", u.getEmail())
-                .getResultList();
-
-        if (list.isEmpty()) {
+    public User getUserData(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        System.out.println("dao");
+        String query = "FROM User WHERE id = :id";
+        final List<User> list = em.createQuery(query).setParameter("id", id).getResultList();
+        if (list.isEmpty()){
             return null;
         }
+        System.out.println(list);
+        return list.get(0);
 
-        User user = (User) list.get(0);
-        String hashedPass = user.getPassword();
-        if (Encrypt.validatePassword(u.getPassword(), hashedPass)) {
-            return user;
-        }
-        return null;
       }
 
 }

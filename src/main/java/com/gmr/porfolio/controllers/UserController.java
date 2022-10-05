@@ -15,52 +15,58 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 
-@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+//@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping({"/porfolio/user"})
+@RequestMapping("/porfolio")
 public class UserController {
     @Autowired
     private Userdao userdao;
     @Autowired
     private JWTutil jwt;
 
-    @PostMapping(value = "api/add")
+    @PostMapping("/user/add")
     public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
     }
 
-    @GetMapping(value = "api/user_data")
-    public User getUserData(User u, @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    @GetMapping("/user/userdata/{id}")
+    public User getUserData(@PathVariable Long id, @RequestHeader(value = "Authorization") String token)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        boolean userLogg = false;
-        try {
-            userLogg = verifyToken(token);
-
-        } catch (Exception e) {
-            System.out.println(e);
+        if (verifyToken(token)){
+            return userdao.getUserData(id);
         }
-        if (userLogg) {
-            return userdao.getUserData(u);
-        }
-
         return null;
+
+
     }
 
-    @DeleteMapping(value = "api/delete")
-    public void  deleteUser(@PathVariable Long id,  @RequestHeader(value = "Authorization") String token) {
-        if (verifyToken(token)) {
+    @DeleteMapping(value = "/user/delete/{id}")
+    public String  deleteUser(@PathVariable Long id, @RequestHeader(value = "Authorization") String token) {
+
+        if (verifyToken(token)){
             userdao.deleteUser(id);
+            return "success";
         }
+        return "FAIL";
+
+
     }
 
 
-    @RequestMapping(value = "api/update")
-    public void updateUser(@RequestBody Long id, User u,  @RequestHeader(value = "Authorization") String token){  // recibe el id del usuario y los datos nuevos del usuario
-        if (verifyToken(token)) {
+    @PatchMapping(value = "/user/update/{id}")
+    public String updateUser(@RequestBody User u, @PathVariable("id") Long id,
+                           @RequestHeader(value = "Authorization") String token) {
+        // recibe el id del usuario y los datos nuevos del usuario
+
+
+        if (verifyToken(token)){
             userdao.editUser(id, u);
+            return "success";
         }
+        return "FAIL";
 
     }
 
