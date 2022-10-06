@@ -20,7 +20,6 @@ public class UserdaoImpl implements Userdao {
     private EntityManager em;
 
 
-
     @Override
     public void editUser(Long id, User editedUser) {
         User u = em.find(User.class, id);
