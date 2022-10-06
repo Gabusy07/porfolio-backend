@@ -1,6 +1,7 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Language;
+import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -38,6 +39,9 @@ public class LanguagedaoImpl implements Languagedao{
 
     @Override
     public void deleteLanguage(Long id) {
+        Language lang = em.find(Language.class, id);
+        em.remove(lang);
+        em.close();
 
     }
 
