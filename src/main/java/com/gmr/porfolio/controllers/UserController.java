@@ -32,14 +32,13 @@ public class UserController {
         return "success";
     }
 
-    @GetMapping("/data/{id}")
-    public User getUserData(@RequestBody User u, @RequestHeader(value = "Authorization") String token)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
+    @GetMapping("/data")
+    public User getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        if (verifyToken(token)){
-            return userdao.getUserData(u);
-        }
-        return null;
+        //if (verifyToken(token)){
+        return userdao.getUserData(u);
+        //}
+        //return null;
 
 
     }

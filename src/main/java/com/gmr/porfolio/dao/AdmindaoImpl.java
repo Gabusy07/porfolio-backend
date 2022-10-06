@@ -2,6 +2,7 @@ package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Admin_user;
 import com.gmr.porfolio.models.Encrypt;
+import com.gmr.porfolio.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,19 +45,38 @@ public class AdmindaoImpl implements Admindao{
     }
 
     @Override
-    public void addAdmin(Admin_user a) throws SQLException {
-        //agrega a DDBB
-        userdao.addUser(a);
-        Long //revisar aqui
-        a.setId();
-        em.merge(a);
+    public void addAdmin(Admin_user a) throws SQLException{
+        Long id_user = null;
+        User u= new User();
+        u.setName(a.getName());
+        u.setLastname(a.getLastname());
+        u.setNickname(a.getNickname());
+        u.setEmail(a.getEmail());
+        u.setPassword(a.getPassword());
+
+        //agrega a DDBB user al admin_user
+        System.out.println(u);
+        userdao.addUser(u);
+
+        try {
+            User user = userdao.getUserData(u);
+            id_user = user.getId();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
+        if (id_user != null){
+            a.setUser_id(id_user);
+            em.merge(a);
+
+        }
+
         em.close();
 
     }
 
     @Override
     public Admin_user getAdminData(Admin_user a) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String query = "FROM User WHERE email = :email";
+        String query = "FROM User WHERE email= :email";
         final List list = em.createQuery(query).setParameter("email", a.getEmail()).getResultList();
         if (list.isEmpty()){
             em.close();

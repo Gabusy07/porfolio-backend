@@ -36,12 +36,15 @@ public class User {
 
     @Getter
     @Setter
-    @Column(name="password")
-    private String password;
+    @Column(name="email")
+    private String email;
+
 
     @Getter
     @Setter
-    @Column(name="email")
-    private String email;
+    @Column(name="password")
+    private String password;
+
+
 
 }

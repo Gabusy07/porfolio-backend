@@ -52,20 +52,25 @@ public class UserdaoImpl implements Userdao {
     @Override
     public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        String query = "FROM User WHERE email = :email";
+
+        String query = "FROM User WHERE email= :email";
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
-        if (list.isEmpty()){
+
+        if (list.isEmpty()) {
+            System.out.println("vacio");
             em.close();
             return null;
         }
 
         User user = (User) list.get(0);
-        String hashedPass = user.getPassword();
-        em.close();
-        if (Encrypt.validatePassword(u.getPassword(), hashedPass)) {
+
+        if (Encrypt.validatePassword(u.getPassword(), user.getPassword()) ) {
+            // revisar encrypting
+            em.close();
             return user;
         }
-        return null;
+        em.close();
+        return user;
     }
 
 

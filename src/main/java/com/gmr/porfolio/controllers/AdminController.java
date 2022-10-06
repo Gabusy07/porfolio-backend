@@ -4,6 +4,7 @@ package com.gmr.porfolio.controllers;
 import com.gmr.porfolio.dao.Admindao;
 import com.gmr.porfolio.models.Admin_user;
 import com.gmr.porfolio.models.Encrypt;
+import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

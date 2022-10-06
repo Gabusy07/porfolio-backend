@@ -16,7 +16,9 @@ public interface Admindao {
 
     void deleteAdmin(Long id);
 
-    void addAdmin(Admin_user a) throws SQLException;
+
 
     Admin_user getAdminData(Admin_user a) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    void addAdmin(Admin_user a) throws SQLException;
 }
