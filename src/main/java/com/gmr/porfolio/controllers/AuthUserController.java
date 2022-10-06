@@ -20,7 +20,7 @@ public class AuthUserController {
     @PostMapping("/api/login")
     public String loginUser(@RequestBody User u) {
         try {
-            User checkedUser = userDao.getUserData(u.getId());
+            User checkedUser = userDao.getUserData(u);
             if (checkedUser != null) {
                 String token = jwt.create(String.valueOf(checkedUser.getId()), checkedUser.getEmail()); // generando un
                 // token devuelto para ser almacenado en cliente

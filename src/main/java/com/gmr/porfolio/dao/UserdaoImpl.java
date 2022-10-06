@@ -30,6 +30,7 @@ public class UserdaoImpl implements Userdao {
         u.setEmail(editedUser.getEmail());
         u.setPassword(editedUser.getPassword());
         em.merge(u);
+        em.close();
     }
 
 
@@ -37,6 +38,7 @@ public class UserdaoImpl implements Userdao {
     public void deleteUser(Long id) {
         User u = em.find(User.class, id);
         em.remove(u);
+        em.close();
 
     }
 
@@ -44,6 +46,7 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
+        em.close();
     }
 
     @Override
@@ -52,11 +55,13 @@ public class UserdaoImpl implements Userdao {
         String query = "FROM User WHERE email = :email";
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
         if (list.isEmpty()){
+            em.close();
             return null;
         }
 
         User user = (User) list.get(0);
         String hashedPass = user.getPassword();
+        em.close();
         if (Encrypt.validatePassword(u.getPassword(), hashedPass)) {
             return user;
         }
