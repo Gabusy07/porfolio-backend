@@ -1,5 +1,6 @@
 package com.gmr.porfolio.dao;
 
+import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +30,7 @@ public class UserdaoImpl implements Userdao {
         u.setEmail(editedUser.getEmail());
         u.setPassword(editedUser.getPassword());
         em.merge(u);
+        em.close();
     }
 
 
@@ -36,6 +38,7 @@ public class UserdaoImpl implements Userdao {
     public void deleteUser(Long id) {
         User u = em.find(User.class, id);
         em.remove(u);
+        em.close();
 
     }
 
@@ -43,19 +46,32 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
+        em.close();
     }
 
     @Override
-    public User getUserData(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        System.out.println("dao");
-        String query = "FROM User WHERE id = :id";
-        final List<User> list = em.createQuery(query).setParameter("id", id).getResultList();
-        if (list.isEmpty()){
+    public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+
+        String query = "FROM User WHERE email= :email";
+        final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
+
+        if (list.isEmpty()) {
+            System.out.println("vacio");
+            em.close();
             return null;
         }
-        System.out.println(list);
-        return list.get(0);
 
-      }
+        User user = (User) list.get(0);
+
+        if (Encrypt.validatePassword(u.getPassword(), user.getPassword()) ) {
+            // revisar encrypting
+            em.close();
+            return user;
+        }
+        em.close();
+        return user;
+    }
+
 
 }

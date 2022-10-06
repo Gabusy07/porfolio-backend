@@ -15,35 +15,35 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 
-//@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/porfolio")
+@RequestMapping("/porfolio/user")
 public class UserController {
     @Autowired
     private Userdao userdao;
     @Autowired
     private JWTutil jwt;
 
-    @PostMapping("/user/add")
-    public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    @PostMapping("/add")
+    public String addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
+        return "success";
     }
 
-    @GetMapping("/user/userdata/{id}")
-    public User getUserData(@PathVariable Long id, @RequestHeader(value = "Authorization") String token)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
+    @GetMapping("/data")
+    public User getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        if (verifyToken(token)){
-            return userdao.getUserData(id);
-        }
-        return null;
+        //if (verifyToken(token)){
+        return userdao.getUserData(u);
+        //}
+        //return null;
 
 
     }
 
-    @DeleteMapping(value = "/user/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public String  deleteUser(@PathVariable Long id, @RequestHeader(value = "Authorization") String token) {
 
         if (verifyToken(token)){
@@ -56,7 +56,7 @@ public class UserController {
     }
 
 
-    @PatchMapping(value = "/user/update/{id}")
+    @PatchMapping(value = "/update/{id}")
     public String updateUser(@RequestBody User u, @PathVariable("id") Long id,
                            @RequestHeader(value = "Authorization") String token) {
         // recibe el id del usuario y los datos nuevos del usuario
