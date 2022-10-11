@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
 @RestController
-@RequestMapping("/porfolio/*/language")
+@RequestMapping("/porfolio/languages")
 public class LanguageController {
 
     @Autowired
