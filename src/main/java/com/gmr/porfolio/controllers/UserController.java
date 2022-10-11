@@ -8,6 +8,7 @@ import com.gmr.porfolio.models.User;
 
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -33,10 +34,11 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public User getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public ResponseEntity<User> getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         //if (verifyToken(token)){
-        return userdao.getUserData(u);
+        User user = userdao.getUserData(u);
+        return ResponseEntity.ok(user);
         //}
         //return null;
 

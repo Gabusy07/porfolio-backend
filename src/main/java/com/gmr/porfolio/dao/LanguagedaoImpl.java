@@ -30,7 +30,6 @@ public class LanguagedaoImpl implements Languagedao{
         lang.setName(editedLang.getName());
         lang.setProgressbar(editedLang.getProgressbar());
         lang.setDate_start(editedLang.getDate_start());
-        lang.setProfile_id(editedLang.getProfile_id());
         em.merge(lang);
         em.close();
 
@@ -47,6 +46,8 @@ public class LanguagedaoImpl implements Languagedao{
 
     @Override
     public void addLanguage(Language lang) {
+        em.merge(lang);
+        em.close();
 
     }
 }
