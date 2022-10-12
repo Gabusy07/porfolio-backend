@@ -34,13 +34,15 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public ResponseEntity<User> getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public ResponseEntity<User> getUser(@PathVariable Long id,
+                                        @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        //if (verifyToken(token)){
-        User user = userdao.getUserData(u);
-        return ResponseEntity.ok(user);
-        //}
-        //return null;
+        if (verifyToken(token)){
+            User user = userdao.getUser(id);
+            return ResponseEntity.ok(user);
+        }
+        return null;
+
 
 
     }

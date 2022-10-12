@@ -1,12 +1,16 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Skill;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
+@Transactional
 public class SkilldaoImpl implements Skilldao{
 
     @PersistenceContext

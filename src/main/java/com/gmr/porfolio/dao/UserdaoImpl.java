@@ -48,6 +48,10 @@ public class UserdaoImpl implements Userdao {
         em.close();
     }
 
+    public User getUser(Long id){
+        return em.find(User.class, id);
+    }
+
     @Override
     public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
@@ -56,7 +60,6 @@ public class UserdaoImpl implements Userdao {
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
 
         if (list.isEmpty()) {
-            System.out.println("vacio");
             em.close();
             return null;
         }
