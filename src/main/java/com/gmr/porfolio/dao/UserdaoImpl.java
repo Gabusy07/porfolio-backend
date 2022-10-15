@@ -72,7 +72,7 @@ public class UserdaoImpl implements Userdao {
             return user;
         }
         em.close();
-        return user;
+        return null;
     }
 
 

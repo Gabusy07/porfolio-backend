@@ -1,24 +1,16 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 import java.util.Date;
 
-@Entity
-@Table(name = "language")
-@ToString
-@EqualsAndHashCode
-public class Language {
+public class LanguagueJson {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Getter
     @Setter
-    @Column(name = "id")
     private Long id;
 
     @Getter @Setter
@@ -29,8 +21,6 @@ public class Language {
     private String progressbar;
 
     @Getter @Setter @Column(name = "date_start")
-    private Date date_start;
-
-
+    private String date_start;
 
 }

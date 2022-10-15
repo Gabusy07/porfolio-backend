@@ -62,11 +62,14 @@ public class UserController {
 
     @PatchMapping(value = "/update/{id}")
     public String updateUser(@RequestBody User u, @PathVariable("id") Long id,
-                           @RequestHeader(value = "Authorization") String token) {
+                           @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // recibe el id del usuario y los datos nuevos del usuario
 
 
         if (verifyToken(token)){
+
+            String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
+            u.setPassword(passw);
             userdao.editUser(id, u);
             return "success";
         }
