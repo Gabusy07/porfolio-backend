@@ -30,5 +30,8 @@ public class Language {
     @Getter @Setter @Column(name = "date_start")
     private String date_start;
 
+    @Getter @Setter @Column(name = "width")
+    private int width;
+
 
 }

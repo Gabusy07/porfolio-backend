@@ -45,6 +45,7 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
+
         em.close();
     }
 

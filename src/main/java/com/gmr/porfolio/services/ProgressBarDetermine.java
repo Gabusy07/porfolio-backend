@@ -3,6 +3,8 @@ package com.gmr.porfolio.services;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgressBarDetermine {
     /* ------------------------------------------------
@@ -14,19 +16,36 @@ public class ProgressBarDetermine {
         this.today = LocalDate.now();
     }
 
-    public  String getProgressbarType(String date){
+    public ArrayList getProgressbarType(String date){
         LocalDate formattedDate = LocalDate.parse(date, this.pattern);
         long noOfDaysBetween = ChronoUnit.DAYS.between(formattedDate, this.today);
         int maxLengthOfYear = 730;
+        int width = (int) (noOfDaysBetween*100/maxLengthOfYear);
+        ArrayList list = new ArrayList<>();
 
-        if (noOfDaysBetween*100/maxLengthOfYear >=75 ){
-            return "progress-bar bg-success";
-        }else if(noOfDaysBetween*100/maxLengthOfYear >=50 ){
-            return "progress-bar bg-primary";
-        }else if(noOfDaysBetween*100/maxLengthOfYear >=25 ){
-            return "progress-bar bg-warning";
+
+        if (width >100 ){
+
+            list.add("progress-bar bg-success");
+            list.add(100);
+            return  list;}
+        else if (width >=75 ){
+
+            list.add("progress-bar bg-success");
+            list.add(width);
+            return  list;
+        }else if(width >=50 ){
+            list.add("progress-bar bg-primary");
+            list.add(width);
+            return  list;
+        }else if(width>=25 ){
+            list.add("progress-bar bg-warning");
+            list.add(width);
+            return  list;
         }
-        return "progress-bar bg-danger";
+        list.add("progress-bar bg-danger");
+        list.add(width);
+        return  list;
 
     }
 
