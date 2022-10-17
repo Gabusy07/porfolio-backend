@@ -44,10 +44,16 @@ public class LanguagedaoImpl implements Languagedao{
 
     @Override
     public ResponseEntity deleteLanguage(Long id) {
-        Language lang = em.find(Language.class, id);
-        em.remove(lang);
-        em.close();
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            Language lang = em.find(Language.class, id);
+            em.remove(lang);
+            em.close();
+            return new ResponseEntity<>(HttpStatus.OK);
+        } finally {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
 
     }
 
