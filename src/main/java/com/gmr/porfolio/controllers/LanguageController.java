@@ -1,17 +1,18 @@
 package com.gmr.porfolio.controllers;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gmr.porfolio.dao.Languagedao;
 import com.gmr.porfolio.models.Language;
-import com.gmr.porfolio.models.LanguagueJson;
+import com.gmr.porfolio.services.ProgressBarDetermine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Locale;
 
 @CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
 @RestController
@@ -28,17 +29,13 @@ public class LanguageController {
     }
 
     @PostMapping("/add")
-    public String addLanguage(@RequestBody LanguagueJson lang) throws ParseException {
+    public String addLanguage(@RequestBody Language lang) throws ParseException {
 
-        Language l = new Language();
-        l.setName(lang.getName());
-        l.setProgressbar(lang.getProgressbar());
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date date = parser.parse(lang.getDate_start());
-        l.setDate_start(date);
-        System.out.println(date);
-        //langdao.addLanguage(l);
+        //recoge la fecha y opera con ella para devolver el tipo de progressbar para la DDBB
+        String date = lang.getDate_start();
+        lang.setProgressbar(new ProgressBarDetermine().getProgressbarType(date));
+        //llamada a dao
+        langdao.addLanguage(lang);
         return "success";
     }
 

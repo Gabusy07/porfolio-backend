@@ -4,9 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "language")
@@ -29,8 +28,7 @@ public class Language {
     private String progressbar;
 
     @Getter @Setter @Column(name = "date_start")
-    private Date date_start;
-
+    private String date_start;
 
 
 }
