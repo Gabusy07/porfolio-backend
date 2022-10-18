@@ -13,11 +13,14 @@ public interface Languagedao {
 
     ArrayList<Language> getAll();
 
-    ResponseEntity editLanguage(Long id, Language editedLang);
+    void editLanguage(Long id, Language editedLang);
 
-    ResponseEntity deleteLanguage(Long id);
+    void deleteLanguage(Long id);
 
-    ResponseEntity addLanguage(Language lang);
+    void addLanguage(Language lang);
+
+
+
 
 
 

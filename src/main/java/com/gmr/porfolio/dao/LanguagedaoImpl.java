@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class LanguagedaoImpl implements Languagedao{
     }
 
     @Override
-    public ResponseEntity editLanguage(Long id, Language editedLang) {
+    public void editLanguage(Long id, Language editedLang) {
         Language lang = em.find(Language.class, id);
         lang.setName(editedLang.getName());
         lang.setProgressbar(editedLang.getProgressbar());
@@ -36,33 +37,24 @@ public class LanguagedaoImpl implements Languagedao{
         lang.setWidth(editedLang.getWidth());
         em.merge(lang);
         em.close();
-        return new ResponseEntity(HttpStatus.OK);
-
-
 
     }
 
     @Override
-    public ResponseEntity deleteLanguage(Long id) {
-        try {
+    public void deleteLanguage(Long id) {
+
             Language lang = em.find(Language.class, id);
             em.remove(lang);
             em.close();
-            return new ResponseEntity<>(HttpStatus.OK);
-        } finally {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
 
 
     }
 
     @Override
-    public ResponseEntity addLanguage(Language lang) {
-
+    public void addLanguage(Language lang) {
         em.merge(lang);
         em.close();
-        return new ResponseEntity(HttpStatus.OK);
 
     }
+
 }

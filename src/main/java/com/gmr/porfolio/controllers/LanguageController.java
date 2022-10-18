@@ -20,13 +20,13 @@ public class LanguageController {
     private Languagedao langdao;
 
     @GetMapping("/all")
-    public ResponseEntity<ArrayList> getAllLang(){
+    public ArrayList getAllLang(){
         ArrayList languagues = langdao.getAll();
-        return new ResponseEntity<ArrayList>(languagues, HttpStatus.OK);
+        return new ArrayList (languagues);
     }
 
     @PostMapping("/add")
-    public ResponseEntity addLanguage(@RequestBody Language lang) throws ParseException {
+    public void addLanguage(@RequestBody Language lang) throws ParseException {
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = lang.getDate_start();
@@ -34,16 +34,17 @@ public class LanguageController {
         lang.setProgressbar((String)progressbarAndWidth.get(0));
         lang.setWidth((int)progressbarAndWidth.get(1));
         //llamada a dao
-        return langdao.addLanguage(lang);
+        langdao.addLanguage(lang);
+
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteLanguage(@PathVariable Long id){
-        return langdao.deleteLanguage(id);
+    public void deleteLanguage(@PathVariable Long id){
+        langdao.deleteLanguage(id);
     }
 
     @PatchMapping(value = "/update/{id}")
-    public ResponseEntity updateLanguage(@RequestBody Language lang, @PathVariable("id") Long id){
+    public void updateLanguage(@RequestBody Language lang, @PathVariable("id") Long id){
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = lang.getDate_start();
@@ -53,7 +54,7 @@ public class LanguageController {
 
         //llamada a dao
 
-        return langdao.editLanguage(id, lang);
+         langdao.editLanguage(id, lang);
 
     }
 
