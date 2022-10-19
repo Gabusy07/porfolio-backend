@@ -8,7 +8,6 @@ import com.gmr.porfolio.models.User;
 
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -26,20 +25,20 @@ public class UserController {
     private JWTutil jwt;
 
     @PostMapping("/add")
-    public String addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+    public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
-        return "success";
+
     }
 
     @GetMapping("/data")
-    public ResponseEntity<User> getUser(@PathVariable Long id,
-                                        @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public User getUser(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
+        String id = jwt.getKey(token);
         if (verifyToken(token)){
-            User user = userdao.getUser(id);
-            return ResponseEntity.ok(user);
+            User user = userdao.getUser(Long.valueOf(id));
+            return user;
         }
         return null;
 
