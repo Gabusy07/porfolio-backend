@@ -2,14 +2,17 @@ package com.gmr.porfolio.controllers;
 
 
 
+import com.gmr.porfolio.dao.UserMatchDao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
 
+import com.gmr.porfolio.models.UserMatch;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.management.Query;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -21,6 +24,10 @@ import java.sql.SQLException;
 public class UserController {
     @Autowired
     private Userdao userdao;
+
+    @Autowired
+    private UserMatchDao userMatchdao;
+
     @Autowired
     private JWTutil jwt;
 
@@ -29,7 +36,6 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
-
     }
 
     @GetMapping("/data")
@@ -42,15 +48,15 @@ public class UserController {
         }
         return null;
 
-
-
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public String  deleteUser(@PathVariable Long id, @RequestHeader(value = "Authorization") String token) {
+    @DeleteMapping(value = "/delete")
+    public String  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
+        String id = jwt.getKey(token);
         if (verifyToken(token)){
-            userdao.deleteUser(id);
+            userdao.deleteUser(Long.valueOf(id));
+            userMatchdao.deleteUserMatch(Long.valueOf(id));
             return "success";
         }
         return "FAIL";
@@ -59,17 +65,18 @@ public class UserController {
     }
 
 
-    @PatchMapping(value = "/update/{id}")
-    public String updateUser(@RequestBody User u, @PathVariable("id") Long id,
+    @PatchMapping(value = "/update")
+    public String updateUser(@RequestBody User u,
                            @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // recibe el id del usuario y los datos nuevos del usuario
 
 
+        String id = jwt.getKey(token);
         if (verifyToken(token)){
 
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
-            userdao.editUser(id, u);
+            userdao.editUser(Long.valueOf(id), u);
             return "success";
         }
         return "FAIL";
@@ -81,4 +88,5 @@ public class UserController {
         return userId != null;
 
     }
+
 }
