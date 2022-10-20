@@ -20,7 +20,6 @@ public class UserdaoImpl implements Userdao {
     private EntityManager em;
 
 
-
     @Override
     public void editUser(Long id, User editedUser) {
         User u = em.find(User.class, id);
@@ -46,7 +45,12 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
+
         em.close();
+    }
+
+    public User getUser(Long id){
+        return em.find(User.class, id);
     }
 
     @Override
@@ -57,7 +61,6 @@ public class UserdaoImpl implements Userdao {
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
 
         if (list.isEmpty()) {
-            System.out.println("vacio");
             em.close();
             return null;
         }
@@ -70,7 +73,7 @@ public class UserdaoImpl implements Userdao {
             return user;
         }
         em.close();
-        return user;
+        return null;
     }
 
 

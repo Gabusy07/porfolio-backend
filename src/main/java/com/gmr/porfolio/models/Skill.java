@@ -16,15 +16,10 @@ public class Skill {
     private Long id;
 
     @Getter @Setter
-    @Column(name = "type")
-    private String type;
+    @Column(name = "name")
+    private String name;
 
     @Getter @Setter @Column(name = "profile_id")
     private Long profile_id;
 
-    @Getter @Setter @Column(name = "profile_account_id")
-    private Long account_id;
-
-    @Getter @Setter @Column(name = "profile_account_admin_id")
-    private Long admin_id;
 }

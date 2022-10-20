@@ -8,6 +8,7 @@ import com.gmr.porfolio.models.User;
 
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -33,12 +34,15 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public User getUserData(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public ResponseEntity<User> getUser(@PathVariable Long id,
+                                        @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        //if (verifyToken(token)){
-        return userdao.getUserData(u);
-        //}
-        //return null;
+        if (verifyToken(token)){
+            User user = userdao.getUser(id);
+            return ResponseEntity.ok(user);
+        }
+        return null;
+
 
 
     }
@@ -58,11 +62,14 @@ public class UserController {
 
     @PatchMapping(value = "/update/{id}")
     public String updateUser(@RequestBody User u, @PathVariable("id") Long id,
-                           @RequestHeader(value = "Authorization") String token) {
+                           @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // recibe el id del usuario y los datos nuevos del usuario
 
 
         if (verifyToken(token)){
+
+            String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
+            u.setPassword(passw);
             userdao.editUser(id, u);
             return "success";
         }
