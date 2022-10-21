@@ -8,7 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_match")
+@Table(name = "User_match")
 @ToString
 @EqualsAndHashCode
 public class UserMatch {

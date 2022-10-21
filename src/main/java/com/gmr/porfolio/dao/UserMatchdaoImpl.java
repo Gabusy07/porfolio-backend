@@ -3,6 +3,8 @@ package com.gmr.porfolio.dao;
 import com.gmr.porfolio.models.Skill;
 import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.models.UserMatch;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -63,9 +65,12 @@ public class UserMatchdaoImpl implements UserMatchDao{
         em.close();
     }
 
+
+
     private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        String query = "Select id FROM User_match WHERE user_id= :idUser"; // clase User consulta a hibernate
-        final List list =  em.createQuery(query).setParameter("id_user", idUser).getResultList();
+
+        String query = "Select id FROM UserMatch m WHERE m.user_id= :idUser"; // clase User consulta a hibernate
+        final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
         if (list.isEmpty()) {
             em.close();
         }

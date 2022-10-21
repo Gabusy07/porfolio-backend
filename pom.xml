@@ -62,6 +62,7 @@
 
 	</dependencies>
 
+
 	<build>
 		<plugins>
 			<plugin>
@@ -70,6 +71,11 @@
 				<configuration>
 					<excludes>
 						<exclude>
+							<hibernate-configuration>
+								<session-factory>
+									<mapping class="com.test.bean.dbBean.testTableHibernate"/>
+								</session-factory>
+							</hibernate-configuration>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>

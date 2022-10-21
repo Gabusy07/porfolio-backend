@@ -51,22 +51,20 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/delete")
-    public String  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String id = jwt.getKey(token);
         if (verifyToken(token)){
             userdao.deleteUser(Long.valueOf(id));
             userMatchdao.deleteUserMatch(Long.valueOf(id));
-            return "success";
         }
-        return "FAIL";
 
 
     }
 
 
     @PatchMapping(value = "/update")
-    public String updateUser(@RequestBody User u,
+    public void updateUser(@RequestBody User u,
                            @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // recibe el id del usuario y los datos nuevos del usuario
 
@@ -77,9 +75,8 @@ public class UserController {
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
             userdao.editUser(Long.valueOf(id), u);
-            return "success";
+
         }
-        return "FAIL";
 
     }
 
