@@ -6,7 +6,14 @@ import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
 @CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
@@ -20,7 +27,7 @@ public class AuthUserController  {
     private JWTutil jwt;
 
     @PostMapping("/login")
-    public Token loginUser(@RequestBody User u) {
+    public Token loginUser(@RequestBody User u) throws NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
         try {
             User checkedUser = userdao.getUserData(u);
@@ -40,4 +47,3 @@ public class AuthUserController  {
     }
 
 }
-

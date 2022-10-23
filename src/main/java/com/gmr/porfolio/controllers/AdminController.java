@@ -4,12 +4,17 @@ package com.gmr.porfolio.controllers;
 import com.gmr.porfolio.dao.Admindao;
 import com.gmr.porfolio.models.Admin_user;
 import com.gmr.porfolio.models.Encrypt;
-import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
@@ -33,7 +38,7 @@ public class AdminController {
 
     @GetMapping("/data/{id}")
     public Admin_user getAdminData(@RequestBody Admin_user a, @RequestHeader(value = "Authorization") String token)
-            throws NoSuchAlgorithmException, InvalidKeySpecException {
+            throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
         if (verifyToken(token)){
             return admindao.getAdminData(a);

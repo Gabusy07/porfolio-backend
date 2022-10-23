@@ -2,8 +2,7 @@ package com.gmr.porfolio.controllers;
 
 
 import com.gmr.porfolio.dao.UserMatchDao;
-import com.gmr.porfolio.models.Encrypt;
-import com.gmr.porfolio.models.User;
+
 import com.gmr.porfolio.models.UserMatch;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;

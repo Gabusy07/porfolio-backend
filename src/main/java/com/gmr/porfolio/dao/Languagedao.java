@@ -2,7 +2,6 @@ package com.gmr.porfolio.dao;
 
 
 import com.gmr.porfolio.models.Language;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -18,10 +17,6 @@ public interface Languagedao {
     void deleteLanguage(Long id);
 
     void addLanguage(Language lang);
-
-
-
-
 
 
 

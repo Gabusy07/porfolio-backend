@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class SkilldaoImpl implements Skilldao{
+public class SkilldaoImpl implements Skilldao {
 
     @PersistenceContext
     private EntityManager em;

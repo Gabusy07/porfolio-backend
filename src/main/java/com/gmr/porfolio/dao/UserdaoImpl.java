@@ -56,7 +56,6 @@ public class UserdaoImpl implements Userdao {
     @Override
     public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-
         String query = "FROM User WHERE email= :email";
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
 
@@ -75,6 +74,5 @@ public class UserdaoImpl implements Userdao {
         em.close();
         return null;
     }
-
 
 }

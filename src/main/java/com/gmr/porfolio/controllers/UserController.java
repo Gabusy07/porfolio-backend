@@ -6,13 +6,14 @@ import com.gmr.porfolio.dao.UserMatchDao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
-
-import com.gmr.porfolio.models.UserMatch;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.management.Query;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public User getUser(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public User getUser(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         String id = jwt.getKey(token);
         if (verifyToken(token)){
