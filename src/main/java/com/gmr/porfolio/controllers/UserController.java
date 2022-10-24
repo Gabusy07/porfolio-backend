@@ -42,8 +42,9 @@ public class UserController {
     @GetMapping("/data")
     public User getUser(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
+
         String id = jwt.getKey(token);
-        if (verifyToken(token)){
+        if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
             return user;
         }
@@ -55,7 +56,7 @@ public class UserController {
     public void  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String id = jwt.getKey(token);
-        if (verifyToken(token)){
+        if (jwt.verifyToken(token)){
             userdao.deleteUser(Long.valueOf(id));
             userMatchdao.deleteUserMatch(Long.valueOf(id));
         }
@@ -71,7 +72,7 @@ public class UserController {
 
 
         String id = jwt.getKey(token);
-        if (verifyToken(token)){
+        if (jwt.verifyToken(token)){
 
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
@@ -81,10 +82,5 @@ public class UserController {
 
     }
 
-    private boolean verifyToken(String token) {
-        String userId = jwt.getKey(token);
-        return userId != null;
-
-    }
 
 }

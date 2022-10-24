@@ -21,7 +21,7 @@ public class SkillController {
     @GetMapping("/data")
     public List<Skill> getAllSkills(@RequestHeader(value = "Authorization") String token){
 
-        if (verifyToken(token)) {
+        if (jwt.verifyToken(token)) {
             List skills = skilldao.getAll();
             return skills;
         }
@@ -32,7 +32,7 @@ public class SkillController {
     @PostMapping("/add")
     public void addSkill(@RequestBody Skill skill, @RequestHeader(value = "Authorization") String token){
 
-        if (verifyToken(token)) {
+        if (jwt.verifyToken(token)) {
             skilldao.addSkill(skill);
         }
     }
@@ -41,7 +41,7 @@ public class SkillController {
     public void deleteSkill(@PathVariable Long id,
                             @RequestHeader(value = "Authorization") String token){
 
-        if (verifyToken(token)) {
+        if (jwt.verifyToken(token)) {
             skilldao.deleteSkill(id);
         }
     }
@@ -50,15 +50,11 @@ public class SkillController {
     public void updateSkill(@RequestBody Skill skill, @PathVariable("id") Long id,
             @RequestHeader(value = "Authorization") String token){
 
-        if (verifyToken(token)) {
+        if (jwt.verifyToken(token)) {
             skilldao.editSkill(id, skill);
         }
 
     }
 
-    private boolean verifyToken(String token) {
-        String userId = jwt.getKey(token);
-        return userId != null;
 
-    }
 }
