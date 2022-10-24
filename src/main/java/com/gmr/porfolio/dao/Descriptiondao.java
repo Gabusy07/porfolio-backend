@@ -4,12 +4,13 @@ import com.gmr.porfolio.models.Description;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 
 
 @Repository
 @Transactional
 public interface Descriptiondao {
-    Description readDescription();
+    ArrayList<Description> readDescription();
 
     void editDescription(Long id, Description editedDesc);
 
