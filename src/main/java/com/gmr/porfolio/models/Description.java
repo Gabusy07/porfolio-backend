@@ -26,7 +26,7 @@ public class Description {
 
     @Getter
     @Setter
-    @Column(name = "tittle")
+    @Column(name = "title")
     private String title;
 
     @Getter

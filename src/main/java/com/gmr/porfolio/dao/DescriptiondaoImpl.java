@@ -1,7 +1,6 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Description;
-import com.gmr.porfolio.models.Language;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

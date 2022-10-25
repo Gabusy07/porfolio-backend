@@ -61,13 +61,13 @@ public class UserdaoImpl implements Userdao {
 
         if (list.isEmpty()) {
             em.close();
+            System.out.println("not found");
             return null;
         }
 
         User user = (User) list.get(0);
 
-        if (Encrypt.validatePassword(u.getPassword(), user.getPassword()) ) {
-            // revisar encrypting
+        if (Encrypt.validatePassword(u.getPassword(), user.getPassword())) {
             em.close();
             return user;
         }
