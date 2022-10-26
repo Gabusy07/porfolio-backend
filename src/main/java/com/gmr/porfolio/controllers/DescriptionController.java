@@ -6,6 +6,7 @@ import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 @CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
@@ -24,10 +25,11 @@ public class DescriptionController {
         return null;
     }
 
+    /*
     @PostMapping("/add")
     public void addDescription(@RequestBody Description desc, @RequestHeader(value = "Authorization") String token){
         if (jwt.verifyToken(token)){
-            descriptiondao.addDescription(desc);
+            //descriptiondao.addDescription(desc);
         }
 
     }
@@ -38,11 +40,13 @@ public class DescriptionController {
             descriptiondao.deleteDescription(id);
         }
     }
+     */
 
     @PatchMapping("/update/{id}")
     public void updateDescription(@RequestBody Description editedDesc,
                                   @PathVariable Long id,
                                   @RequestHeader(value="Authorization") String token ){
+
         if (jwt.verifyToken(token)){
             descriptiondao.editDescription(id, editedDesc);
         }
