@@ -14,7 +14,4 @@ public interface Descriptiondao {
 
     void editDescription(Long id, Description editedDesc);
 
-    void deleteDescription(Long id);
-
-    void addDescription(Description desc);
 }

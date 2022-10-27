@@ -25,22 +25,7 @@ public class DescriptionController {
         return null;
     }
 
-    /*
-    @PostMapping("/add")
-    public void addDescription(@RequestBody Description desc, @RequestHeader(value = "Authorization") String token){
-        if (jwt.verifyToken(token)){
-            //descriptiondao.addDescription(desc);
-        }
 
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteDescription(@PathVariable Long id ,@RequestHeader(value="Authorization") String token){
-        if (jwt.verifyToken(token)){
-            descriptiondao.deleteDescription(id);
-        }
-    }
-     */
 
     @PatchMapping("/update/{id}")
     public void updateDescription(@RequestBody Description editedDesc,

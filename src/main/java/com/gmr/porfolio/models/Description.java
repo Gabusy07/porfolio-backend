@@ -34,4 +34,9 @@ public class Description {
     @Column(name = "photo")
     private String photo;
 
+    @Getter
+    @Setter
+    @Column(name = "name_photo")
+    private String namePhoto;
+
 }

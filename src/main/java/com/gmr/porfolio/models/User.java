@@ -45,6 +45,15 @@ public class User {
     @Column(name="password")
     private String password;
 
+    @Getter
+    @Setter
+    @Column(name="rol")
+    private String rol;
+
+    @Getter
+    @Setter
+    private Boolean enable;
+
 
 
 }

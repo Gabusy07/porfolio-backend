@@ -28,21 +28,12 @@ public class DescriptiondaoImpl implements Descriptiondao {
         desc.setText(editedDesc.getText());
         desc.setTitle(editedDesc.getTitle());
         desc.setPhoto(editedDesc.getPhoto());
+        desc.setNamePhoto(editedDesc.getNamePhoto());
         em.merge(desc);
         em.close();
     }
 
-    @Override
-    public void deleteDescription(Long id) {
-        Description desc = em.find(Description.class, id);
-        em.remove(desc);
-        em.close();
 
-    }
 
-    @Override
-    public void addDescription(Description desc) {
-        em.merge(desc);
-        em.close();
-    }
+
 }
