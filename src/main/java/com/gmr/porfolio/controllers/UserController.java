@@ -3,6 +3,7 @@ package com.gmr.porfolio.controllers;
 
 
 import com.gmr.porfolio.dao.UserMatchDao;
+import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
@@ -25,6 +26,9 @@ import java.sql.SQLException;
 public class UserController {
     @Autowired
     private Userdao userdao;
+
+    @Autowired
+    UserRoldao userRoldao;
 
     @Autowired
     private UserMatchDao userMatchdao;

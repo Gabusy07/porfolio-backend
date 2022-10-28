@@ -1,10 +1,6 @@
 package com.gmr.porfolio.dao;
 
-import com.gmr.porfolio.models.Skill;
-import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.models.UserMatch;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

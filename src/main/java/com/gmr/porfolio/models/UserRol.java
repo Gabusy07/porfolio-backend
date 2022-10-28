@@ -6,12 +6,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-@Table(name = "user_match")
+@Table(name = "user_rol")
 @ToString
 @EqualsAndHashCode
-public class UserMatch {
+public class UserRol {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -21,17 +23,11 @@ public class UserMatch {
 
     @Getter
     @Setter
-    @Column(name = "points")
-    private int points;
-
-    @Getter
-    @Setter
-    @Column(name = "avatar")
-    private String avatar;
+    @Column(name = "rol")
+    private String rol;
 
     @Getter
     @Setter
     @Column(name = "user_id")
     private Long user_id;
-
 }
