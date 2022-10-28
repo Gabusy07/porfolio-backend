@@ -36,6 +36,7 @@ public class UserController {
     public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
+        u.setRol("common");
         userdao.addUser(u);
     }
 
