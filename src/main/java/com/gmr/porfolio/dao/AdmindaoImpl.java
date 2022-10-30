@@ -55,11 +55,10 @@ public class AdmindaoImpl implements Admindao{
         u.setPassword(a.getPassword());
 
         //agrega a DDBB user al admin_user
-        System.out.println(u);
         userdao.addUser(u);
 
         try {
-            User user = userdao.getUserData(u);
+            User user = userdao.getUserDataByEmail(u);
             id_user = user.getId();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);

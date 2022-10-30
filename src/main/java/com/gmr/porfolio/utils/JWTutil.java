@@ -91,4 +91,10 @@ public class JWTutil {
 
         return claims.getId();
     }
+
+    public boolean verifyToken(String token) {
+        String userId = this.getKey(token);
+        return userId != null;
+
+    }
 }

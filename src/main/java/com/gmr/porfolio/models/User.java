@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "user")
@@ -44,6 +45,22 @@ public class User {
     @Setter
     @Column(name="password")
     private String password;
+
+    @Getter
+    @Setter
+    @Column(name="roles")
+    private ArrayList<String> roles;
+
+    @Getter
+    @Setter
+    @Column(name = "points")
+    private int points;
+
+    @Getter
+    @Setter
+    @Column(name = "avatar")
+    private String avatar;
+
 
 
 

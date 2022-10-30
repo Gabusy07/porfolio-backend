@@ -1,17 +1,17 @@
 package com.gmr.porfolio.models;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "description")
+@Table(name = "user_match")
 @ToString
 @EqualsAndHashCode
-public class Description {
-
-
+public class UserMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -21,22 +21,17 @@ public class Description {
 
     @Getter
     @Setter
-    @Column(name = "text")
-    private String text;
+    @Column(name = "points")
+    private int points;
 
     @Getter
     @Setter
-    @Column(name = "title")
-    private String title;
+    @Column(name = "avatar")
+    private String avatar;
 
     @Getter
     @Setter
-    @Column(name = "photo")
-    private String photo;
-
-    @Getter
-    @Setter
-    @Column(name = "name_photo")
-    private String namePhoto;
+    @Column(name = "user_id")
+    private Long idUser;
 
 }

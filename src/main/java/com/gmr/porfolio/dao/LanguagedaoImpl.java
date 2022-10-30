@@ -1,14 +1,10 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Language;
-import com.gmr.porfolio.models.User;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -24,6 +20,7 @@ public class LanguagedaoImpl implements Languagedao{
     public ArrayList<Language> getAll() {
         String query = "FROM Language"; // clase User consulta a hibernate
         ArrayList list = (ArrayList) em.createQuery(query).getResultList();
+        em.close();
         return list;
 
     }
@@ -46,8 +43,6 @@ public class LanguagedaoImpl implements Languagedao{
             Language lang = em.find(Language.class, id);
             em.remove(lang);
             em.close();
-
-
     }
 
     @Override

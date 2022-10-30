@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -45,7 +46,6 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
-
         em.close();
     }
 
@@ -54,21 +54,20 @@ public class UserdaoImpl implements Userdao {
     }
 
     @Override
-    public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
-
+    public User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "FROM User WHERE email= :email";
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
 
         if (list.isEmpty()) {
             em.close();
+            System.out.println("not found");
             return null;
         }
 
         User user = (User) list.get(0);
 
-        if (Encrypt.validatePassword(u.getPassword(), user.getPassword()) ) {
-            // revisar encrypting
+        if (Encrypt.validatePassword(u.getPassword(), user.getPassword())) {
             em.close();
             return user;
         }
@@ -76,5 +75,50 @@ public class UserdaoImpl implements Userdao {
         return null;
     }
 
+    @Override
+    public User getUserDataById(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String query = "FROM User WHERE id= :id";
+        final List list = em.createQuery(query).setParameter("id", id).getResultList();
+
+        if (list.isEmpty()) {
+            em.close();
+            System.out.println("not found");
+            return null;
+        }
+        User user = (User) list.get(0);
+        em.close();
+        return user;
+    }
+
+    public Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate
+        final List list =  em.createQuery(query).setParameter("email", email).getResultList();
+        if (list.isEmpty()) {
+            em.close();
+            return null;
+        }
+        return (Long) list.get(0);
+
+    }
+
+    @Override
+    public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getUserDataById(id).getRoles();
+        return roles.contains("guess");
+    }
+
+    @Override
+    public boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getUserDataById(id).getRoles();
+        return roles.contains("guess");
+    }
+
+    @Override
+    public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getUserDataById(id).getRoles();
+        return roles.contains("common");
+    }
 
 }

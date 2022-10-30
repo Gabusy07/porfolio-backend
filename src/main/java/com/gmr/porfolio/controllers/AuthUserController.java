@@ -5,10 +5,15 @@ import com.gmr.porfolio.models.Token;
 import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
 @CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
@@ -22,21 +27,58 @@ public class AuthUserController  {
     private JWTutil jwt;
 
     @PostMapping("/login")
-    public ResponseEntity<Token> loginUser(@RequestBody User u) {
+    public Token loginUser(@RequestBody User u) throws NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
         try {
-            User checkedUser = userdao.getUserData(u);
+            User checkedUser = userdao.getUserDataByEmail(u);
             if (checkedUser != null) {
                 String t = jwt.create(String.valueOf(checkedUser.getId()), checkedUser.getEmail()); // generando un
                 // token devuelto para ser almacenado en cliente
                 Token token = new Token(t);
-                return new ResponseEntity<Token>(token, HttpStatus.OK);
+                return new Token(t);
             } else {
-                return new ResponseEntity<Token>((Token) null, HttpStatus.NOT_FOUND);
+                return new Token("FAIL");
             }
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            return new ResponseEntity<Token>((Token) null, HttpStatus.BAD_REQUEST);
+            return new Token("FAIL");
         }
-    }
-}
 
+
+    }
+
+    @GetMapping("/logged")
+    public boolean isLogged(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        if (jwt.verifyToken(token)){
+            return true;
+        }
+        return false;
+
+    }
+
+    //-----------------------------
+    @GetMapping("/auth/admin")
+    public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolAdmin(Long.valueOf(id));
+
+    }
+
+    @GetMapping("/auth/guess")
+    public boolean isGuess(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolGuess(Long.valueOf(id));
+
+    }
+
+    @GetMapping("/auth/common")
+    public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolCommon(Long.valueOf(id));
+    }
+
+}

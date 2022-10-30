@@ -8,18 +8,25 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "user_rol")
 @ToString
 @EqualsAndHashCode
-public class Skill {
+public class UserRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
+    @Getter
+    @Setter
+    @Column(name = "id")
     private Long id;
 
-    @Getter @Setter
-    @Column(name = "name")
-    private String name;
+    @Getter
+    @Setter
+    @Column(name = "rol")
+    private String rol;
 
+    @Getter
+    @Setter
+    @Column(name = "user_id")
+    private Long idUser;
 }

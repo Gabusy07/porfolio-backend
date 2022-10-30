@@ -2,8 +2,8 @@ package com.gmr.porfolio.controllers;
 
 import com.gmr.porfolio.dao.Skilldao;
 import com.gmr.porfolio.models.Skill;
+import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +15,46 @@ public class SkillController {
     @Autowired
     private Skilldao skilldao;
 
+    @Autowired
+    private JWTutil jwt;
+
     @GetMapping("/data")
-    public ResponseEntity<List<Skill>> getAllSkills(){
-        List skills = skilldao.getAll();
-        return ResponseEntity.ok(skills);
+    public List<Skill> getAllSkills(@RequestHeader(value = "Authorization") String token){
+
+        if (jwt.verifyToken(token)) {
+            List skills = skilldao.getAll();
+            return skills;
+        }
+        return null;
+
     }
 
     @PostMapping("/add")
-    public String addSkill(@RequestBody Skill skill){
-        skilldao.addSkill(skill);
-        return "success";
+    public void addSkill(@RequestBody Skill skill, @RequestHeader(value = "Authorization") String token){
+
+        if (jwt.verifyToken(token)) {
+            skilldao.addSkill(skill);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteSkill(@PathVariable Long id){
-        skilldao.deleteSkill(id);
+    public void deleteSkill(@PathVariable Long id,
+                            @RequestHeader(value = "Authorization") String token){
+
+        if (jwt.verifyToken(token)) {
+            skilldao.deleteSkill(id);
+        }
     }
 
     @PatchMapping(value = "/update/{id}")
-    public ResponseEntity<List<Skill>> updateSkill(@RequestBody Skill skill, @PathVariable("id") Long id){
-        skilldao.editSkill(id, skill);
-        return getAllSkills();
+    public void updateSkill(@RequestBody Skill skill, @PathVariable("id") Long id,
+            @RequestHeader(value = "Authorization") String token){
+
+        if (jwt.verifyToken(token)) {
+            skilldao.editSkill(id, skill);
+        }
 
     }
+
+
 }
