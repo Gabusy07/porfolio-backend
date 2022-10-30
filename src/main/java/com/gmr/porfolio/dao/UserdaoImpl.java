@@ -53,7 +53,7 @@ public class UserdaoImpl implements Userdao {
     }
 
     @Override
-    public User getUserData(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "FROM User WHERE email= :email";
         final List list = em.createQuery(query).setParameter("email", u.getEmail()).getResultList();
@@ -72,6 +72,22 @@ public class UserdaoImpl implements Userdao {
         }
         em.close();
         return null;
+    }
+
+    @Override
+    public User getUserDataById(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String query = "FROM User WHERE id= :id";
+        final List list = em.createQuery(query).setParameter("id", id).getResultList();
+
+        if (list.isEmpty()) {
+            em.close();
+            System.out.println("not found");
+            return null;
+        }
+        User user = (User) list.get(0);
+        em.close();
+        return user;
     }
 
     public Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {

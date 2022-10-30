@@ -1,6 +1,8 @@
 package com.gmr.porfolio.services;
 
 import com.gmr.porfolio.dao.UserRoldao;
+import com.gmr.porfolio.dao.Userdao;
+import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.models.UserRol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import java.util.ArrayList;
 public class UserRolService {
     @Autowired
     UserRoldao userRoldao;
+
+    @Autowired
+    Userdao userdao;
 
     public  ArrayList<String> getUserRoles(Long user_id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList<String> roles = new ArrayList<>(userRoldao.getRoles(user_id));
@@ -34,7 +39,10 @@ public class UserRolService {
         }
     }
 
-    public void deleteUserRoles(Long  userId) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        userRoldao.deleteUserRol(userId);
+    public void deleteUserRoles(Long idUser, int lenRoles) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        for (int i=0; i< lenRoles; i++){
+            userRoldao.deleteUserRol(idUser);
+        }
+
     }
 }

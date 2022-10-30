@@ -79,8 +79,11 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            userdao.deleteUser(Long.valueOf(id));
+            int lenRoles = userdao.getUserDataById(Long.valueOf(id)).getRoles().size();
             _userMatch.deleteUserMatch(Long.valueOf(id));
+            _userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
+            userdao.deleteUser(Long.valueOf(id));
+
         }
 
 

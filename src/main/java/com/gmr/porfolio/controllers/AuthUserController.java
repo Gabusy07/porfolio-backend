@@ -30,7 +30,7 @@ public class AuthUserController  {
     public Token loginUser(@RequestBody User u) throws NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
         try {
-            User checkedUser = userdao.getUserData(u);
+            User checkedUser = userdao.getUserDataByEmail(u);
             if (checkedUser != null) {
                 String t = jwt.create(String.valueOf(checkedUser.getId()), checkedUser.getEmail()); // generando un
                 // token devuelto para ser almacenado en cliente

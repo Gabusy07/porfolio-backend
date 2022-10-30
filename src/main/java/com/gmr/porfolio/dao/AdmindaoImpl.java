@@ -59,7 +59,7 @@ public class AdmindaoImpl implements Admindao{
         userdao.addUser(u);
 
         try {
-            User user = userdao.getUserData(u);
+            User user = userdao.getUserDataByEmail(u);
             id_user = user.getId();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             throw new RuntimeException(e);
