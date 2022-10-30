@@ -55,7 +55,6 @@ public class AdmindaoImpl implements Admindao{
         u.setPassword(a.getPassword());
 
         //agrega a DDBB user al admin_user
-        System.out.println(u);
         userdao.addUser(u);
 
         try {

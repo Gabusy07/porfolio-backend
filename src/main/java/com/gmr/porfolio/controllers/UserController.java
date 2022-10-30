@@ -65,7 +65,6 @@ public class UserController {
             ArrayList<String> roles = new ArrayList<>(_userRol.getUserRoles(user.getId()));
             user.setRoles(roles);
             UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
-            System.out.println(matchData);
             user.setAvatar(matchData.getAvatar());
             user.setPoints(matchData.getPoints());
             return user;
