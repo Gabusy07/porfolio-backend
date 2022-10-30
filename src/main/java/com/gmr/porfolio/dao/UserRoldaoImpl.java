@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Set;
+import java.util.ArrayList;
 
 @Repository
 @Transactional
@@ -18,14 +18,14 @@ public class UserRoldaoImpl implements UserRoldao{
     private EntityManager em;
 
     @Override
-    public Set<UserRol> getData(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        return null;
+    public ArrayList<String> getRoles(Long user_id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String query = "SELECT rol FROM UserRol WHERE user_id= :user_id";
+        final ArrayList<String> list = (ArrayList<String>) em.createQuery(query).setParameter("user_id", user_id).getResultList();
+        return list;
     }
 
-    @Override
-    public void editUserRol(Long id, UserRol edited) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-    }
 
     @Override
     public void deleteUserRol(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
@@ -36,6 +36,5 @@ public class UserRoldaoImpl implements UserRoldao{
     public void addUserRol(UserRol userRol) {
         em.merge(userRol);
         em.close();
-
     }
 }

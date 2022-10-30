@@ -45,7 +45,6 @@ public class UserdaoImpl implements Userdao {
     public void addUser(User u) {
         //agrega a DDBB
         em.merge(u);
-
         em.close();
     }
 
@@ -73,6 +72,18 @@ public class UserdaoImpl implements Userdao {
         }
         em.close();
         return null;
+    }
+
+    public Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate
+        final List list =  em.createQuery(query).setParameter("email", email).getResultList();
+        if (list.isEmpty()) {
+            em.close();
+            return null;
+        }
+        return (Long) list.get(0);
+
     }
 
 }

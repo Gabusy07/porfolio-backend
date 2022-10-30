@@ -65,7 +65,7 @@ public class UserMatchdaoImpl implements UserMatchDao{
 
     private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        String query = "Select id FROM UserMatch m WHERE m.user_id= :idUser"; // clase User consulta a hibernate
+        String query = "Select id FROM UserMatch m WHERE m.idUser= :idUser"; // clase User consulta a hibernate
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
         if (list.isEmpty()) {
             em.close();

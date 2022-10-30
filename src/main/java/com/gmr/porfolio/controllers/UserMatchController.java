@@ -29,7 +29,7 @@ public class UserMatchController {
 
         String userId = jwt.getKey(token);
         if (verifyToken(token)){
-            m.setUser_id(Long.valueOf(userId));
+            m.setIdUser(Long.valueOf(userId));
             userMatchdao.addUserMatch(m);
         }
     }

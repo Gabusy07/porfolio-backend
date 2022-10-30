@@ -18,7 +18,7 @@ public interface UserMatchDao {
 
     public void editUserMatch(Long id, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    public void deleteUserMatch(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
     public void addUserMatch(UserMatch userMatch);
 }

@@ -32,6 +32,6 @@ public class UserMatch {
     @Getter
     @Setter
     @Column(name = "user_id")
-    private Long user_id;
+    private Long idUser;
 
 }

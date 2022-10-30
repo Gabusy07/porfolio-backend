@@ -46,4 +46,15 @@ public class AuthUserController  {
 
     }
 
+    @GetMapping("/logged")
+    public boolean isLogged(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        if (jwt.verifyToken(token)){
+            return true;
+        }
+        return false;
+
+    }
+
 }

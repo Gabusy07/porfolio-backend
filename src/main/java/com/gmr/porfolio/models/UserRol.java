@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "user_rol")
@@ -29,5 +28,5 @@ public class UserRol {
     @Getter
     @Setter
     @Column(name = "user_id")
-    private Long user_id;
+    private Long idUser;
 }
