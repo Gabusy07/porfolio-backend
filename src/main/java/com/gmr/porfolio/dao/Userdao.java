@@ -33,4 +33,10 @@ public interface Userdao {
     User getUser(Long id) ;
     Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
+    boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
 }

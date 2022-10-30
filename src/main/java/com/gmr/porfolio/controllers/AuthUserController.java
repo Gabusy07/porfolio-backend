@@ -57,4 +57,28 @@ public class AuthUserController  {
 
     }
 
+    //-----------------------------
+    @GetMapping("/auth/admin")
+    public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolAdmin(Long.valueOf(id));
+
+    }
+
+    @GetMapping("/auth/guess")
+    public boolean isGuess(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolGuess(Long.valueOf(id));
+
+    }
+
+    @GetMapping("/auth/common")
+    public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+
+        String id = jwt.getKey(token);
+        return userdao.isRolCommon(Long.valueOf(id));
+    }
+
 }
