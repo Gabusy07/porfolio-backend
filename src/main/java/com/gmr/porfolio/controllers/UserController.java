@@ -2,13 +2,8 @@ package com.gmr.porfolio.controllers;
 
 
 
-import com.gmr.porfolio.dao.UserMatchDao;
-import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
-import com.gmr.porfolio.models.Encrypt;
-import com.gmr.porfolio.models.User;
-import com.gmr.porfolio.models.UserMatch;
-import com.gmr.porfolio.models.UserRol;
+import com.gmr.porfolio.models.*;
 import com.gmr.porfolio.services.UserMatchService;
 import com.gmr.porfolio.services.UserRolService;
 import com.gmr.porfolio.utils.JWTutil;
@@ -23,10 +18,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 
-@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="https://porfolio-eced8.web.app", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {

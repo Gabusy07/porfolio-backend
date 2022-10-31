@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="https://porfolio-eced8.web.app", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/*/skills")
 public class SkillController {
