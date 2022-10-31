@@ -106,7 +106,7 @@ public class UserdaoImpl implements Userdao {
     @Override
     public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList roles = getUserDataById(id).getRoles();
-        return roles.contains("guess");
+        return roles.contains("admin");
     }
 
     @Override
