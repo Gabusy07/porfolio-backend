@@ -4,7 +4,15 @@ import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
 
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.transaction.Transactional;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 @Repository
@@ -12,12 +20,23 @@ import java.sql.SQLException;
 public interface Userdao {
 
 
-    void editUser(Long id);
+    void editUser(Long id, User editedUser);
 
     void deleteUser(Long id);
 
     void addUser(User u) throws SQLException;
 
-    User getUserData(Long id); //throws NoSuchAlgorithmException, InvalidKeySpecException
+    User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    User getUserDataById(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    User getUser(Long id) ;
+    Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 }

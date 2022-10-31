@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 
 @Entity
 @Table(name = "user")
@@ -19,6 +17,7 @@ public class User {
     @Getter
     @Setter
     @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter
@@ -38,12 +37,31 @@ public class User {
 
     @Getter
     @Setter
+    @Column(name="email")
+    private String email;
+
+
+    @Getter
+    @Setter
     @Column(name="password")
     private String password;
 
     @Getter
     @Setter
-    @Column(name="email")
-    private String email;
+    @Column(name="roles")
+    private ArrayList<String> roles;
+
+    @Getter
+    @Setter
+    @Column(name = "points")
+    private int points;
+
+    @Getter
+    @Setter
+    @Column(name = "avatar")
+    private String avatar;
+
+
+
 
 }

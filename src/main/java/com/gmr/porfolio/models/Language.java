@@ -1,14 +1,16 @@
 package com.gmr.porfolio.models;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+import javax.persistence.*;
+import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
-
+@Entity
+@Table(name = "language")
+@ToString
+@EqualsAndHashCode
 public class Language {
 
     @Id
@@ -25,16 +27,11 @@ public class Language {
     @Getter @Setter @Column(name = "progressbar")
     private String progressbar;
 
-    @Getter @Setter @Column(name = "date_start_learn")
-    private Date date_learn;
+    @Getter @Setter @Column(name = "date_start")
+    private String date_start;
 
-    @Getter @Setter @Column(name = "profile_id")
-    private Long profile_id;
+    @Getter @Setter @Column(name = "width")
+    private int width;
 
-    @Getter @Setter @Column(name = "profile_account_idaccount")
-    private Long account_id;
-
-    @Getter @Setter @Column(name = "profile_account_admin_idadmin")
-    private Long admin_id;
 
 }
