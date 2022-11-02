@@ -20,14 +20,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-@CrossOrigin(origins="https://porfolio-eced8.web.app", maxAge = 3600)
+@CrossOrigin(origins="${localhost}", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
     @Autowired
     private Userdao userdao;
-
-
 
     @Autowired
     private UserMatchService _userMatch;
