@@ -11,22 +11,19 @@ import javax.persistence.*;
 @Table(name = "user_rol")
 @ToString
 @EqualsAndHashCode
+@Data
 public class UserRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     @Column(name = "id")
     private Long id;
 
-    @Getter
-    @Setter
+
     @Column(name = "rol")
     private String rol;
 
-    @Getter
-    @Setter
+
     @Column(name = "user_id")
     private Long idUser;
 }
