@@ -15,9 +15,9 @@ public class UserMatchService {
 
     public void setDataMatch(Long idUser){
         UserMatch uMatch = new UserMatch();
-        uMatch.setIdUser(idUser);
-        uMatch.setAvatar("");
-        uMatch.setPoints(0);
+        //uMatch.setIdUser(idUser);
+        //uMatch.setAvatar("");
+       // uMatch.setPoints(0);
         userMatchDao.addUserMatch(uMatch);
     }
 
@@ -27,7 +27,6 @@ public class UserMatchService {
 
     public UserMatch getDataMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         UserMatch m = userMatchDao.getData(idUser);
-        System.out.println(m.getPoints());
         return m;
     }
 }

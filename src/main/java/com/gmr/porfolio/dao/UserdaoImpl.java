@@ -102,7 +102,7 @@ public class UserdaoImpl implements Userdao {
         return (Long) list.get(0);
 
     }
-
+/*
     @Override
     public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList roles = getUserDataById(id).getRoles();
@@ -119,6 +119,6 @@ public class UserdaoImpl implements Userdao {
     public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList roles = getUserDataById(id).getRoles();
         return roles.contains("common");
-    }
+    }*/
 
 }

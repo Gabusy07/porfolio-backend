@@ -17,7 +17,6 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 
 @CrossOrigin(origins="${localhost}", maxAge = 3600)
@@ -27,24 +26,24 @@ public class UserController {
     @Autowired
     private Userdao userdao;
 
-    @Autowired
-    private UserMatchService _userMatch;
+   // @Autowired
+    //private UserMatchService _userMatch;
 
     @Autowired
     private JWTutil jwt;
 
-    @Autowired
-    private UserRolService _userRol;
+    //@Autowired
+   // private UserRolService _userRol;
 
     @PostMapping("/add")
     public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
-        Long id = userdao.getIDFromUser(u.getEmail());
-        String name = u.getName();
-        _userRol.setUserRoles(name, id);
-        _userMatch.setDataMatch(id);
+        //Long id = userdao.getIDFromUser(u.getEmail());
+       // String name = u.getName();
+        //_userRol.setUserRoles(name, id);
+        //_userMatch.setDataMatch(id);
 
     }
 
@@ -54,11 +53,9 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
-            ArrayList<String> roles = new ArrayList<>(_userRol.getUserRoles(user.getId()));
-            user.setRoles(roles);
-            UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
-            user.setAvatar(matchData.getAvatar());
-            user.setPoints(matchData.getPoints());
+            //Set<String> roles = _userRol.getUserRoles(user.getId());
+            //user.setUserRol(roles);
+           // UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
             return user;
         }
         return null;
@@ -70,9 +67,9 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            int lenRoles = userdao.getUserDataById(Long.valueOf(id)).getRoles().size();
-            _userMatch.deleteUserMatch(Long.valueOf(id));
-            _userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
+            //int lenRoles = userdao.getUserDataById(Long.valueOf(id)).getRoles().size();
+            //_userMatch.deleteUserMatch(Long.valueOf(id));
+            //_userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
             userdao.deleteUser(Long.valueOf(id));
 
         }

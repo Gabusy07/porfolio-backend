@@ -26,9 +26,9 @@ public class UserRolService {
 
     }
 
-    public void setUserRoles(String userName, Long idUser){
+    public void setUserRoles(String userName, User user){
         UserRol uRol = new UserRol();
-        uRol.setIdUser(idUser);
+        uRol.setUserR(user);
         if (userName == "invitado"){
             uRol.setRol("guess");
         }else{

@@ -1,29 +1,26 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_rol")
+@Table(name = "usersRoles")
 @ToString
-@EqualsAndHashCode
 @Data
 public class UserRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Long idRol;
 
 
     @Column(name = "rol")
     private String rol;
 
 
-    @Column(name = "user_id")
-    private Long idUser;
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User userR;
 }

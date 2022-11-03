@@ -1,66 +1,50 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
-@ToString @EqualsAndHashCode
+@Table(name = "users")
+@ToString
+@Data
 public class User {
 
     @Id
-    @Getter
-    @Setter
-    @Column(name="id")
+    @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
+
     @Column(name="name")
     private String name;
 
-    @Getter
-    @Setter
+
     @Column(name="lastname")
     private String lastname;
 
-    @Getter
-    @Setter
+
     @Column(name="nickname")
     private String nickname;
 
-    @Getter
-    @Setter
+
     @Column(name="email")
     private String email;
 
 
-    @Getter
-    @Setter
+
     @Column(name="password")
     private String password;
 
-    @Getter
-    @Setter
-    @Column(name="roles")
-    private ArrayList<String> roles;
 
-    @Getter
-    @Setter
-    @Column(name = "points")
-    private int points;
+/*
+    @OneToMany(mappedBy = "userR")
+    @JoinColumn(name = "usersRoles")
+    private Set<UserRol> userRol;*/
 
-    @Getter
-    @Setter
-    @Column(name = "avatar")
-    private String avatar;
-
+    @OneToOne(mappedBy = "userM")
+    @JoinColumn(name = "points")
+    private UserMatch userMatch;
 
 
 
