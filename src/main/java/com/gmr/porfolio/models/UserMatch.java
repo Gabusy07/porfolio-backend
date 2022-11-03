@@ -1,37 +1,32 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_match")
+@Table(name = "users_matches")
 @ToString
-@EqualsAndHashCode
+@Data
 public class UserMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
+
     @Column(name = "id")
     private Long id;
 
-    @Getter
-    @Setter
+
     @Column(name = "points")
     private int points;
 
-    @Getter
-    @Setter
+
     @Column(name = "avatar")
     private String avatar;
 
-    @Getter
-    @Setter
-    @Column(name = "user_id")
-    private Long idUser;
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user_m;
 
 }

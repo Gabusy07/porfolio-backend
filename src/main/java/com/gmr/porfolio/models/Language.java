@@ -8,9 +8,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 @ToString
-@EqualsAndHashCode
 public class Language {
 
     @Id

@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "description")
 @ToString
-@EqualsAndHashCode
 public class Description {
 
 

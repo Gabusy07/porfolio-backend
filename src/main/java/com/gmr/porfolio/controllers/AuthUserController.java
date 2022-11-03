@@ -58,6 +58,7 @@ public class AuthUserController  {
     }
 
     //-----------------------------
+    /*
     @GetMapping("/auth/admin")
     public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
@@ -79,6 +80,6 @@ public class AuthUserController  {
 
         String id = jwt.getKey(token);
         return userdao.isRolCommon(Long.valueOf(id));
-    }
+    }*/
 
 }

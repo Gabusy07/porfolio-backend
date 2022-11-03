@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -49,7 +48,7 @@ public class UserdaoImpl implements Userdao {
         em.close();
     }
 
-    public User getUser(Long id){
+    public User getUser(Long id) {
         return em.find(User.class, id);
     }
 
@@ -83,7 +82,6 @@ public class UserdaoImpl implements Userdao {
 
         if (list.isEmpty()) {
             em.close();
-            System.out.println("not found");
             return null;
         }
         User user = (User) list.get(0);
@@ -94,7 +92,7 @@ public class UserdaoImpl implements Userdao {
     public Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate
-        final List list =  em.createQuery(query).setParameter("email", email).getResultList();
+        final List list = em.createQuery(query).setParameter("email", email).getResultList();
         if (list.isEmpty()) {
             em.close();
             return null;
@@ -102,7 +100,9 @@ public class UserdaoImpl implements Userdao {
         return (Long) list.get(0);
 
     }
+}
 
+    /*
     @Override
     public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList roles = getUserDataById(id).getRoles();
@@ -119,6 +119,5 @@ public class UserdaoImpl implements Userdao {
     public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
         ArrayList roles = getUserDataById(id).getRoles();
         return roles.contains("common");
-    }
+    }*/
 
-}

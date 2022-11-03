@@ -15,7 +15,7 @@ public class UserMatchService {
 
     public void setDataMatch(Long idUser){
         UserMatch uMatch = new UserMatch();
-        uMatch.setIdUser(idUser);
+        //uMatch.setIdUser(idUser);
         uMatch.setAvatar("");
         uMatch.setPoints(0);
         userMatchDao.addUserMatch(uMatch);

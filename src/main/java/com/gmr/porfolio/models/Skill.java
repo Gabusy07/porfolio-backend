@@ -8,9 +8,9 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
 @ToString
-@EqualsAndHashCode
+
 public class Skill {
 
     @Id
