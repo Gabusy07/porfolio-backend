@@ -54,4 +54,23 @@ public class UserRoldaoImpl implements UserRoldao{
         return (Long) list.get(0);
 
     }
+
+    @Override
+    public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getRoles(id);
+        return roles.contains("admin");
+    }
+
+    @Override
+    public boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        ArrayList roles = getRoles(id);
+        return roles.contains("guess");
+    }
+
+    @Override
+    public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getRoles(id);
+        return roles.contains("common");
+    }
 }
