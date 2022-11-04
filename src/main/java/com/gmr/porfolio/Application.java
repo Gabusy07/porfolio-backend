@@ -36,6 +36,5 @@ public class Application {
 		return new CorsFilter(source);
 	}*/
 }
-	
-}
+
 

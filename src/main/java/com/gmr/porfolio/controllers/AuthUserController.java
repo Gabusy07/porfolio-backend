@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-@CrossOrigin(origins="${localhost}", maxAge = 3600)
+@CrossOrigin(origins="${host}", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/api")
 public class AuthUserController  {
@@ -58,7 +58,7 @@ public class AuthUserController  {
     }
 
     //-----------------------------
-    /*
+
     @GetMapping("/auth/admin")
     public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
@@ -80,6 +80,6 @@ public class AuthUserController  {
 
         String id = jwt.getKey(token);
         return userdao.isRolCommon(Long.valueOf(id));
-    }*/
+    }
 
 }

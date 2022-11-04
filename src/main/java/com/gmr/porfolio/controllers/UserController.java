@@ -18,11 +18,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 
-@CrossOrigin(origins="${localhost}", maxAge = 3600)
+
+@CrossOrigin(origins="${host}", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
