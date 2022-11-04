@@ -2,6 +2,7 @@ package com.gmr.porfolio.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,41 +12,33 @@ import java.util.Set;
 public class User {
 
     @Id
-    @Column(name="user_id")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 
 
-    @Column(name="lastname")
+    @Column(name="lastname", nullable = false)
     private String lastname;
 
 
-    @Column(name="nickname")
+    @Column(name="nickname", nullable = false)
     private String nickname;
 
-
-    @Column(name="email")
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
-
-
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
 
+    /*
+    @OneToOne(mappedBy = "userM", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private UserMatch match;
 
-/*
-    @OneToMany(mappedBy = "userR")
-    @JoinColumn(name = "usersRoles")
-    private Set<UserRol> userRol;*/
-
-    @OneToOne(mappedBy = "userM")
-    @JoinColumn(name = "points")
-    private UserMatch userMatch;
-
-
+    @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<UserRol> rol;*/
 
 }

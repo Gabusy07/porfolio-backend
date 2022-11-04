@@ -24,9 +24,11 @@ public class UserMatch {
     private String avatar;
 
 
-
     @OneToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User userM;
+
+    @Column(name="user_id")
+    private Long userID;
 
 }

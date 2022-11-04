@@ -20,7 +20,11 @@ public class UserRol {
     private String rol;
 
 
+
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
     private User userR;
+
+    @Column(name = "user_id")
+    private Long userID;
 }

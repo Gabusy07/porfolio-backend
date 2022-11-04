@@ -1,9 +1,6 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,15 +8,16 @@ import javax.persistence.*;
 @Table(name = "skill")
 @ToString
 @EqualsAndHashCode
+@Data
 public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
+    @Column(name = "id")
     private Long id;
 
-    @Getter @Setter
-    @Column(name = "name")
+
+    @Column(name = "name", nullable = false)
     private String name;
 
 }
