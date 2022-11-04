@@ -20,6 +20,7 @@ public class UserRolService {
     Userdao userdao;
 
     public  ArrayList<String> getUserRoles(Long user_id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
         ArrayList<String> roles = new ArrayList<>(userRoldao.getRoles(user_id));
         return roles;
 

@@ -2,8 +2,8 @@ package com.gmr.porfolio.models;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -34,11 +34,20 @@ public class User {
     @Column(name="password", nullable = false)
     private String password;
 
-    /*
-    @OneToOne(mappedBy = "userM", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private UserMatch match;
 
-    @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<UserRol> rol;*/
+/*
+    @OneToOne(mappedBy = "userM", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private UserMatch match = new UserMatch();
+
+    @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<UserRol> rol = new ArrayList<>();*/
+
+
+
+    private ArrayList<String> roles;
+
+    private int points;
+
+    private String avatar;
 
 }

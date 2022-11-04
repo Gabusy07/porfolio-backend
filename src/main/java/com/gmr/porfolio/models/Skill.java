@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "skill")
+@Table(name = "skills")
 @ToString
 @EqualsAndHashCode
 @Data

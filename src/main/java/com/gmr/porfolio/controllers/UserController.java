@@ -17,6 +17,9 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 @CrossOrigin(origins="${localhost}", maxAge = 3600)
@@ -39,13 +42,11 @@ public class UserController {
     public void addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
-
         userdao.addUser(u);
         Long id = userdao.getIDFromUser(u.getEmail());
-        System.out.println(id);
         String name = u.getName();
-       _userRol.setUserRoles(name, id);
-       _userMatch.setDataMatch(id);
+        _userMatch.setDataMatch(id);
+        _userRol.setUserRoles(name, id);
 
 
     }
@@ -57,7 +58,13 @@ public class UserController {
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
 
-           //UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
+            UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
+            ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
+
+            user.setRoles(roles);
+            user.setPoints(matchData.getPoints());
+            user.setAvatar(matchData.getAvatar());
+
             return user;
         }
         return null;
@@ -69,7 +76,9 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
+            int lenRoles = _userRol.getUserRoles(Long.valueOf(id)).size();
             _userMatch.deleteUserMatch(Long.valueOf(id));
+            _userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
             userdao.deleteUser(Long.valueOf(id));
 
         }
@@ -87,7 +96,6 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
             userdao.editUser(Long.valueOf(id), u);
