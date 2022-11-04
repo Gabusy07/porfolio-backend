@@ -65,10 +65,6 @@
 			<version>2.3.0</version>
 		</dependency>
 		<!-- Add CloudSQL Starter for MySQL -->
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>spring-cloud-gcp-starter-sql-mysql</artifactId>
-		</dependency>
 
 	</dependencies>
 
