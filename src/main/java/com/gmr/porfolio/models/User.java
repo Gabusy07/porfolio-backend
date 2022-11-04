@@ -1,67 +1,53 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
+import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "user")
-@ToString @EqualsAndHashCode
+@Table(name = "users")
+@ToString
+@Data
 public class User {
 
     @Id
-    @Getter
-    @Setter
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Getter
-    @Setter
-    @Column(name="name")
+
+    @Column(name="name", nullable = false)
     private String name;
 
-    @Getter
-    @Setter
-    @Column(name="lastname")
+
+    @Column(name="lastname", nullable = false)
     private String lastname;
 
-    @Getter
-    @Setter
-    @Column(name="nickname")
+
+    @Column(name="nickname", nullable = false)
     private String nickname;
 
-    @Getter
-    @Setter
-    @Column(name="email")
+    @Column(name="email", nullable = false, unique = true)
     private String email;
 
-
-    @Getter
-    @Setter
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
 
-    @Getter
-    @Setter
-    @Column(name="roles")
+
+/*
+    @OneToOne(mappedBy = "userM", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private UserMatch match = new UserMatch();
+
+    @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<UserRol> rol = new ArrayList<>();*/
+
+
+
     private ArrayList<String> roles;
 
-    @Getter
-    @Setter
-    @Column(name = "points")
     private int points;
 
-    @Getter
-    @Setter
-    @Column(name = "avatar")
     private String avatar;
-
-
-
 
 }

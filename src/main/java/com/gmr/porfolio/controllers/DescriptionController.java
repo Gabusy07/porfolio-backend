@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="${localhost}", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/*/description")
 public class DescriptionController {

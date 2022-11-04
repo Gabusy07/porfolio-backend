@@ -1,36 +1,33 @@
 package com.gmr.porfolio.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "language")
+@Table(name = "languages")
 @ToString
 @EqualsAndHashCode
+@Data
 public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
+
     @Column(name = "id")
     private Long id;
 
-    @Getter @Setter
-    @Column(name = "name")
+
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Getter @Setter @Column(name = "progressbar")
+     @Column(name = "progressbar", nullable = false)
     private String progressbar;
 
-    @Getter @Setter @Column(name = "date_start")
+    @Column(name = "date_start", nullable = false)
     private String date_start;
 
-    @Getter @Setter @Column(name = "width")
+    @Getter @Setter @Column(name = "width", nullable = false)
     private int width;
 
 

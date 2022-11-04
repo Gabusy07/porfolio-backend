@@ -1,6 +1,7 @@
 package com.gmr.porfolio.services;
 
 import com.gmr.porfolio.dao.UserMatchDao;
+import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.models.UserMatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,9 @@ public class UserMatchService {
     @Autowired
     private UserMatchDao userMatchDao;
 
-    public void setDataMatch(Long idUser){
+    public void setDataMatch(Long userID){
         UserMatch uMatch = new UserMatch();
-        uMatch.setIdUser(idUser);
+        uMatch.setUserID(userID);
         uMatch.setAvatar("");
         uMatch.setPoints(0);
         userMatchDao.addUserMatch(uMatch);
@@ -27,7 +28,6 @@ public class UserMatchService {
 
     public UserMatch getDataMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         UserMatch m = userMatchDao.getData(idUser);
-        System.out.println(m.getPoints());
         return m;
     }
 }
