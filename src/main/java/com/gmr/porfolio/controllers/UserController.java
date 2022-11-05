@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 
 
-//@CrossOrigin(origins="${host}", maxAge = 3600)
+@CrossOrigin(origins="${host}")
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
+@CrossOrigin(origins="${host}")
 @RestController
 @RequestMapping("/porfolio/*/skills")
 public class SkillController {
