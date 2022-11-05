@@ -18,7 +18,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
     public ArrayList<Description> readDescription() {
         String query = "FROM Description"; // clase User consulta a hibernate
         ArrayList list = (ArrayList) em.createQuery(query).getResultList();
-        em.close();
+
         return list;
     }
 
@@ -30,7 +30,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
         desc.setPhoto(editedDesc.getPhoto());
         desc.setNamePhoto(editedDesc.getNamePhoto());
         em.merge(desc);
-        em.close();
+
     }
 
 

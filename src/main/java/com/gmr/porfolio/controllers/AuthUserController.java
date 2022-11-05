@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-@CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/api")
 public class AuthUserController  {
