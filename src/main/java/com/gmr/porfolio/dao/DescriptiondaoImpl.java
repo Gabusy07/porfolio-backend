@@ -24,6 +24,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
 
     @Override
     public void editDescription(Long id, Description editedDesc) {
+        
         Description desc = em.find(Description.class, id);
         desc.setText(editedDesc.getText());
         desc.setTitle(editedDesc.getTitle());
@@ -32,6 +33,8 @@ public class DescriptiondaoImpl implements Descriptiondao {
         em.merge(desc);
 
     }
+
+
 
 
 
