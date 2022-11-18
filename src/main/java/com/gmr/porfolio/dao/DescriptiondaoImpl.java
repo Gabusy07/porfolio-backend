@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 
@@ -18,7 +19,6 @@ public class DescriptiondaoImpl implements Descriptiondao {
     public ArrayList<Description> readDescription() {
         String query = "FROM Description"; // clase User consulta a hibernate
         ArrayList list = (ArrayList) em.createQuery(query).getResultList();
-
         return list;
     }
 
@@ -29,11 +29,16 @@ public class DescriptiondaoImpl implements Descriptiondao {
         desc.setTitle(editedDesc.getTitle());
         desc.setPhoto(editedDesc.getPhoto());
         desc.setNamePhoto(editedDesc.getNamePhoto());
+        tableLen();
         em.merge(desc);
-
     }
 
 
-
+    private boolean tableLen(){
+        String query = "SELECT COUNT(*) FROM Description";
+        Query len = em.createQuery(query);
+        System.out.println(len.getMaxResults());
+        return true;
+    }
 
 }

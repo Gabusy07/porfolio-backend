@@ -51,7 +51,7 @@ public class AuthUserController  {
     }
 
     @GetMapping("/logged")
-    public boolean isLogged(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public boolean isLogged(@RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
@@ -67,6 +67,7 @@ public class AuthUserController  {
     public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         String id = jwt.getKey(token);
+        System.out.println(userRoldao.isRolAdmin(Long.valueOf(id)));
         return userRoldao.isRolAdmin(Long.valueOf(id));
 
     }

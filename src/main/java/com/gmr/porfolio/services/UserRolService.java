@@ -34,8 +34,6 @@ public class UserRolService {
         }else{
             uRol.setRol("common");
             userRoldao.addUserRol(uRol);
-            uRol.setRol("admin");
-            userRoldao.addUserRol(uRol);
             uRol.setRol("guess"); //asegura que el usuario tenga dos roles
             userRoldao.addUserRol(uRol);
         }

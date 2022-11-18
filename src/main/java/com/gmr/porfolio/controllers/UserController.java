@@ -19,7 +19,9 @@ import java.util.ArrayList;
 
 
 
-@CrossOrigin(origins="${host}")
+
+@CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
@@ -82,7 +84,6 @@ public class UserController {
 
 
     }
-
 
 
     @PatchMapping(value = "/update")
