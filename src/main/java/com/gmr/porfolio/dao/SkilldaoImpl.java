@@ -30,7 +30,7 @@ public class SkilldaoImpl implements Skilldao {
         Skill skill = em.find(Skill.class, id);
         skill.setName(editedSkill.getName());
         em.merge(skill);
-        em.close();
+
 
     }
 
@@ -38,14 +38,14 @@ public class SkilldaoImpl implements Skilldao {
     public void deleteSkill(Long id) {
         Skill skill =  em.find(Skill.class, id);
         em.remove(skill);
-        em.close();
+
 
     }
 
     @Override
     public void addSkill(Skill skill) {
         em.merge(skill);
-        em.close();
+
 
     }
 }
