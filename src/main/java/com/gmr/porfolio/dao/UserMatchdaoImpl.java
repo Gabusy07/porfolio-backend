@@ -37,7 +37,6 @@ public class UserMatchdaoImpl implements UserMatchDao{
     @Override
     public void editUserMatch(Long idUser, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-
         UserMatch m = em.find(UserMatch.class, idUser);
         m.setPoints(edited.getPoints());
         m.setAvatar((edited.getAvatar()));
@@ -48,8 +47,8 @@ public class UserMatchdaoImpl implements UserMatchDao{
 
     @Override
     public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
-
-        em.remove(em.find(UserMatch.class, idUser));
+        Long id = getIDFromUser(idUser);
+        em.remove(em.find(UserMatch.class, id));
         em.close();
 
     }
