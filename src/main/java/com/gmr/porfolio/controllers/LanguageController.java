@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-@CrossOrigin(origins="${host}", maxAge = 3600)
+@CrossOrigin(origins="${host}")
 @RestController
 @RequestMapping("/porfolio/languages")
 public class LanguageController {

@@ -1,7 +1,5 @@
 package com.gmr.porfolio.controllers;
 
-
-
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.*;
 import com.gmr.porfolio.services.UserMatchService;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 
 
 @CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
@@ -86,7 +85,6 @@ public class UserController {
 
 
     }
-
 
 
     @PatchMapping(value = "/update")
