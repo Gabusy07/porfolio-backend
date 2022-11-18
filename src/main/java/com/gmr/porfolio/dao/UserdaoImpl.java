@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,24 +102,6 @@ public class UserdaoImpl implements Userdao {
         }
         return (Long) list.get(0);
 
-    }
-
-    @Override
-    public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        ArrayList roles = getUserDataById(id).getRoles();
-        return roles.contains("guess");
-    }
-
-    @Override
-    public boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        ArrayList roles = getUserDataById(id).getRoles();
-        return roles.contains("guess");
-    }
-
-    @Override
-    public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        ArrayList roles = getUserDataById(id).getRoles();
-        return roles.contains("common");
     }
 
 }

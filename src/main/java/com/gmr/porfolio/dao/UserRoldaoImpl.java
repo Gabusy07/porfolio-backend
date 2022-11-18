@@ -20,10 +20,10 @@ public class UserRoldaoImpl implements UserRoldao{
     private EntityManager em;
 
     @Override
-    public ArrayList<String> getRoles(Long user_id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public ArrayList<String> getRoles(Long userID) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        String query = "SELECT rol FROM UserRol WHERE user_id= :user_id";
-        final ArrayList<String> list = (ArrayList<String>) em.createQuery(query).setParameter("user_id", user_id).getResultList();
+        String query = "SELECT rol FROM UserRol WHERE user_id= :userID";
+        final ArrayList<String> list = (ArrayList<String>) em.createQuery(query).setParameter("userID", userID).getResultList();
         return list;
     }
 
@@ -45,12 +45,32 @@ public class UserRoldaoImpl implements UserRoldao{
 
     private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        String query = "Select id FROM UserRol m WHERE m.idUser= :idUser"; // clase User consulta a hibernate
+
+        String query = "Select id FROM UserRol m WHERE user_id= :idUser"; // clase User consulta a hibernate
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
         if (list.isEmpty()) {
             em.close();
         }
         return (Long) list.get(0);
 
+    }
+
+    @Override
+    public boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getRoles(id);
+        return roles.contains("admin");
+    }
+
+    @Override
+    public boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+        ArrayList roles = getRoles(id);
+        return roles.contains("guess");
+    }
+
+    @Override
+    public boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        ArrayList roles = getRoles(id);
+        return roles.contains("common");
     }
 }

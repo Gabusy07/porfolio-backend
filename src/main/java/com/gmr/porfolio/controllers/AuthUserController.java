@@ -1,5 +1,6 @@
 package com.gmr.porfolio.controllers;
 
+import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Token;
 import com.gmr.porfolio.models.User;
@@ -16,13 +17,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-@CrossOrigin(origins= "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins="${host}", maxAge = 3600)
 @RestController
 @RequestMapping("/porfolio/api")
 public class AuthUserController  {
 
     @Autowired
     private Userdao userdao;
+
+    @Autowired
+    private UserRoldao userRoldao;
     @Autowired
     private JWTutil jwt;
 
@@ -47,7 +51,7 @@ public class AuthUserController  {
     }
 
     @GetMapping("/logged")
-    public boolean isLogged(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public boolean isLogged(@RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
@@ -58,11 +62,13 @@ public class AuthUserController  {
     }
 
     //-----------------------------
+
     @GetMapping("/auth/admin")
     public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         String id = jwt.getKey(token);
-        return userdao.isRolAdmin(Long.valueOf(id));
+        System.out.println(userRoldao.isRolAdmin(Long.valueOf(id)));
+        return userRoldao.isRolAdmin(Long.valueOf(id));
 
     }
 
@@ -70,7 +76,7 @@ public class AuthUserController  {
     public boolean isGuess(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         String id = jwt.getKey(token);
-        return userdao.isRolGuess(Long.valueOf(id));
+        return userRoldao.isRolGuess(Long.valueOf(id));
 
     }
 
@@ -78,7 +84,9 @@ public class AuthUserController  {
     public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
         String id = jwt.getKey(token);
-        return userdao.isRolCommon(Long.valueOf(id));
+
+        return userRoldao.isRolCommon(Long.valueOf(id));
+
     }
 
 }
