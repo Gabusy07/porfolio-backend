@@ -25,8 +25,13 @@ public class UserMatch {
 
 
 
+    /*
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user_m;
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private User userM;*/
+
+
+    @Column(name="user_id")
+    private Long userID;
 
 }

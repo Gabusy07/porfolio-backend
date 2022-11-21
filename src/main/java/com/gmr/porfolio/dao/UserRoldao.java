@@ -15,8 +15,11 @@ public interface UserRoldao {
     public ArrayList<String> getRoles(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 
-
     public void deleteUserRol(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
     public void addUserRol(UserRol userRol);
+    boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+
+    boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 }

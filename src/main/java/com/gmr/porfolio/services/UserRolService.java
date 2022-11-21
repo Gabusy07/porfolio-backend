@@ -20,15 +20,17 @@ public class UserRolService {
     Userdao userdao;
 
     public  ArrayList<String> getUserRoles(Long user_id) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        ArrayList<String> roles = new ArrayList<>(userRoldao.getRoles(user_id));
 
+        ArrayList<String> roles = new ArrayList<>(userRoldao.getRoles(user_id));
         return roles;
 
     }
 
-    public void setUserRoles(String userName, Long idUser){
+    public void setUserRoles(String userName, Long userID){
         UserRol uRol = new UserRol();
-        //uRol.setUserRolID(idUser);
+
+        uRol.setUserID(userID);
+
         if (userName == "invitado"){
             uRol.setRol("guess");
         }else{
@@ -43,6 +45,5 @@ public class UserRolService {
         for (int i=0; i< lenRoles; i++){
             userRoldao.deleteUserRol(idUser);
         }
-
     }
 }

@@ -1,7 +1,5 @@
 package com.gmr.porfolio.controllers;
 
-
-
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.*;
 import com.gmr.porfolio.services.UserMatchService;
@@ -20,14 +18,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 
-@CrossOrigin(origins="https://porfolio-eced8.web.app", maxAge = 3600)
+
+
+@CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
     @Autowired
     private Userdao userdao;
-
-
 
     @Autowired
     private UserMatchService _userMatch;
@@ -43,10 +42,12 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
-        //Long id = userdao.getIDFromUser(u.getEmail());
-        //String name = u.getName();
-        //_userRol.setUserRoles(name, id);
-        //_userMatch.setDataMatch(id);
+
+        Long id = userdao.getIDFromUser(u.getEmail());
+        String name = u.getName();
+        _userMatch.setDataMatch(id);
+        _userRol.setUserRoles(name, id);
+
 
     }
 
@@ -56,11 +57,15 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
-            //ArrayList<String> roles = new ArrayList<>(_userRol.getUserRoles(user.getId()));
-            //user.setRoles(roles);
-           // UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
-            //user.setAvatar(matchData.getAvatar());
-            //user.setPoints(matchData.getPoints());
+
+
+            UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
+            ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
+
+            user.setRoles(roles);
+            user.setPoints(matchData.getPoints());
+            user.setAvatar(matchData.getAvatar());
+
             return user;
         }
         return null;
@@ -72,16 +77,15 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            //int lenRoles = userdao.getUserDataById(Long.valueOf(id)).getRoles().size();
-            //_userMatch.deleteUserMatch(Long.valueOf(id));
-            //_userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
+            int lenRoles = _userRol.getUserRoles(Long.valueOf(id)).size();
+            _userMatch.deleteUserMatch(Long.valueOf(id));
+            _userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
             userdao.deleteUser(Long.valueOf(id));
 
         }
 
 
     }
-
 
 
     @PatchMapping(value = "/update")
@@ -92,7 +96,6 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
             userdao.editUser(Long.valueOf(id), u);
