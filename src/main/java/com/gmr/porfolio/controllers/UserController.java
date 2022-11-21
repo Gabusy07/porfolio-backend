@@ -42,6 +42,7 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
+
         Long id = userdao.getIDFromUser(u.getEmail());
         String name = u.getName();
         _userMatch.setDataMatch(id);
@@ -56,6 +57,7 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
+
 
             UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
             ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
