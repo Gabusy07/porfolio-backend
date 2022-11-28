@@ -51,7 +51,7 @@ public class AuthUserController  {
     }
 
     @GetMapping("/logged")
-    public boolean isLogged(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public boolean isLogged(@RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
@@ -87,5 +87,6 @@ public class AuthUserController  {
         return userRoldao.isRolCommon(Long.valueOf(id));
 
     }
+
 
 }

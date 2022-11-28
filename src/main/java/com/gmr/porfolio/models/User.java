@@ -3,7 +3,9 @@ package com.gmr.porfolio.models;
 import lombok.*;
 import javax.persistence.*;
 import java.util.ArrayList;
+
 import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -13,8 +15,10 @@ public class User {
 
     @Id
     @Column(name="id")
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
 
     @Column(name="name", nullable = false)
@@ -45,6 +49,7 @@ public class User {
 
 
     private ArrayList<String> roles;
+
 
     private int points;
 

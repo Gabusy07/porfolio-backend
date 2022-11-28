@@ -43,7 +43,9 @@ public class UserRoldaoImpl implements UserRoldao{
     private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 
+
         String query = "Select id FROM UserRol m WHERE user_id= :idUser"; // clase User consulta a hibernate
+
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
         return (Long) list.get(0);
 

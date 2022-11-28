@@ -19,7 +19,9 @@ import java.util.ArrayList;
 
 
 
-@CrossOrigin(origins="${host}")
+
+@CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
@@ -40,6 +42,7 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
+
         Long id = userdao.getIDFromUser(u.getEmail());
         String name = u.getName();
         _userMatch.setDataMatch(id);
@@ -54,6 +57,7 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
+
 
             UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
             ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
@@ -72,6 +76,7 @@ public class UserController {
     public void  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String id = jwt.getKey(token);
+
         if (jwt.verifyToken(token)){
             int lenRoles = _userRol.getUserRoles(Long.valueOf(id)).size();
             _userMatch.deleteUserMatch(Long.valueOf(id));
@@ -82,7 +87,6 @@ public class UserController {
 
 
     }
-
 
 
     @PatchMapping(value = "/update")
