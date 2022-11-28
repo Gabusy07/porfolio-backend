@@ -7,8 +7,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "languages")
 @ToString
+
 @EqualsAndHashCode
 @Data
+
 public class Language {
 
     @Id

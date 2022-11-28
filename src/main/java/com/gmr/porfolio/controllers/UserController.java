@@ -1,7 +1,5 @@
 package com.gmr.porfolio.controllers;
 
-
-
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.*;
 import com.gmr.porfolio.services.UserMatchService;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 
 
 @CrossOrigin(origins="${host}", maxAge = 3600)
+
 @RestController
 @RequestMapping("/porfolio/user")
 public class UserController {
@@ -43,6 +42,7 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
+
         Long id = userdao.getIDFromUser(u.getEmail());
         String name = u.getName();
         _userMatch.setDataMatch(id);
@@ -57,6 +57,7 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             User user = userdao.getUser(Long.valueOf(id));
+
 
             UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
             ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
@@ -86,7 +87,6 @@ public class UserController {
 
 
     }
-
 
 
     @PatchMapping(value = "/update")

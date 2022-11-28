@@ -33,24 +33,20 @@ public class UserRoldaoImpl implements UserRoldao{
     public void deleteUserRol(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Long id = getIDFromUser(idUser);
         em.remove(em.find(UserRol.class, id));
-        em.close();
-
     }
 
     @Override
     public void addUserRol(UserRol userRol) {
         em.merge(userRol);
-        em.close();
     }
 
     private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
 
+
         String query = "Select id FROM UserRol m WHERE user_id= :idUser"; // clase User consulta a hibernate
+
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
-        if (list.isEmpty()) {
-            em.close();
-        }
         return (Long) list.get(0);
 
     }

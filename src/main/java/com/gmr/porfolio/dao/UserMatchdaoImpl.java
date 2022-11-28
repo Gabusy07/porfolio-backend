@@ -51,12 +51,13 @@ public class UserMatchdaoImpl implements UserMatchDao{
         em.remove(em.find(UserMatch.class, id));
         em.close();
 
+
     }
 
     @Override
     public void addUserMatch(UserMatch userMatch) {
         em.merge(userMatch);
-        em.close();
+
     }
 
 
@@ -65,9 +66,6 @@ public class UserMatchdaoImpl implements UserMatchDao{
 
         String query = "Select id FROM UserMatch m WHERE user_id= :idUser"; // clase User consulta a hibernate
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
-        if (list.isEmpty()) {
-            em.close();
-        }
         return (Long) list.get(0);
 
     }

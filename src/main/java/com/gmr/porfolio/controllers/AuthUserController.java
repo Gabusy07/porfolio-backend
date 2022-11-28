@@ -17,7 +17,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-@CrossOrigin(origins="${host}", maxAge = 3600)
+@CrossOrigin(origins="${host}")
 @RestController
 @RequestMapping("/porfolio/api")
 public class AuthUserController  {
@@ -87,5 +87,6 @@ public class AuthUserController  {
         return userRoldao.isRolCommon(Long.valueOf(id));
 
     }
+
 
 }
