@@ -11,7 +11,7 @@
 	<groupId>com.gmr</groupId>
 	<artifactId>porfolio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>gmr.porfolio</name>
 	<description>gmr.porfolio</description>
 	<properties>
