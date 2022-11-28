@@ -30,5 +30,4 @@ public interface Userdao {
     User getUser(Long id) ;
     Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-
 }

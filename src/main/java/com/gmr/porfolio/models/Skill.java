@@ -9,6 +9,7 @@ import javax.persistence.*;
 @ToString
 @EqualsAndHashCode
 @Data
+
 public class Skill {
 
     @Id
