@@ -76,6 +76,7 @@ public class UserController {
     public void  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String id = jwt.getKey(token);
+
         if (jwt.verifyToken(token)){
             int lenRoles = _userRol.getUserRoles(Long.valueOf(id)).size();
             _userMatch.deleteUserMatch(Long.valueOf(id));
