@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users_matches")
+@Table(name = "user_matches")
 @ToString
 @Data
 public class UserMatch {

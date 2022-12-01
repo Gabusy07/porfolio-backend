@@ -29,14 +29,9 @@ public class UserRolService {
     public void setUserRoles(String userName, Long userID){
         UserRol uRol = new UserRol();
         uRol.setUserID(userID);
-        if (userName == "invitado"){
-            uRol.setRol("guess");
-        }else{
-            uRol.setRol("common");
-            userRoldao.addUserRol(uRol);
-            uRol.setRol("guess"); //asegura que el usuario tenga dos roles
-            userRoldao.addUserRol(uRol);
-        }
+        uRol.setRol("common");
+        userRoldao.addUserRol(uRol);
+
     }
 
     public void deleteUserRoles(Long idUser, int lenRoles) throws NoSuchAlgorithmException, InvalidKeySpecException {

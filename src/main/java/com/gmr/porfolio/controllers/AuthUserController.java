@@ -71,14 +71,6 @@ public class AuthUserController  {
 
     }
 
-    @GetMapping("/auth/guess")
-    public boolean isGuess(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-
-        String id = jwt.getKey(token);
-        return userRoldao.isRolGuess(Long.valueOf(id));
-
-    }
-
     @GetMapping("/auth/common")
     public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
