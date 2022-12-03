@@ -80,4 +80,9 @@ public class AuthUserController  {
 
     }
 
+    @GetMapping(value = "auth/guest")
+    public Token guestToken(){
+        Token token = new Token(jwt.create("0000", "xxx"));
+        return token;
+    }
 }
