@@ -51,6 +51,9 @@ public class UserMatchdaoImpl implements UserMatchDao{
         em.remove(em.find(UserMatch.class, id));
         em.close();
 
+        Long id = getIDFromUser(idUser);
+        em.remove(em.find(UserMatch.class, id));
+
 
     }
 
