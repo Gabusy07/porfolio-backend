@@ -24,6 +24,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
 
     @Override
     public void editDescription(Long id, Description editedDesc) {
+        
         Description desc = em.find(Description.class, id);
         if(desc != null){
             desc.setText(editedDesc.getText());
@@ -51,5 +52,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
         Query len = em.createQuery(query);
         return true;
     }
+
+
 
 }

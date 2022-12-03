@@ -5,7 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+
 @Table(name = "user_roles")
+
 @ToString
 @Data
 public class UserRol {

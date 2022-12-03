@@ -2,7 +2,6 @@ package com.gmr.porfolio.services;
 
 import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
-import com.gmr.porfolio.models.User;
 import com.gmr.porfolio.models.UserRol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
