@@ -28,9 +28,11 @@ public class UserRolService {
 
     public void setUserRoles(String userName, Long userID){
         UserRol uRol = new UserRol();
+
         uRol.setUserID(userID);
         uRol.setRol("common");
         userRoldao.addUserRol(uRol);
+
 
     }
 

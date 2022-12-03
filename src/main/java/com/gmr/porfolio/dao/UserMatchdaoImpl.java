@@ -47,9 +47,13 @@ public class UserMatchdaoImpl implements UserMatchDao{
 
     @Override
     public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+        Long id = getIDFromUser(idUser);
+        em.remove(em.find(UserMatch.class, id));
+        em.close();
 
         Long id = getIDFromUser(idUser);
         em.remove(em.find(UserMatch.class, id));
+
 
     }
 
