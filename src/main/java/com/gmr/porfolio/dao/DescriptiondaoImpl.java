@@ -25,19 +25,30 @@ public class DescriptiondaoImpl implements Descriptiondao {
     @Override
     public void editDescription(Long id, Description editedDesc) {
         Description desc = em.find(Description.class, id);
-        desc.setText(editedDesc.getText());
-        desc.setTitle(editedDesc.getTitle());
-        desc.setPhoto(editedDesc.getPhoto());
-        desc.setNamePhoto(editedDesc.getNamePhoto());
-        tableLen();
-        em.merge(desc);
+        if(desc != null){
+            desc.setText(editedDesc.getText());
+            desc.setTitle(editedDesc.getTitle());
+            desc.setPhoto(editedDesc.getPhoto());
+            desc.setNamePhoto(editedDesc.getNamePhoto());
+            tableLen();
+            em.merge(desc);
+        }
+        else{
+            desc = new Description();
+            desc.setText(editedDesc.getText());
+            desc.setTitle(editedDesc.getTitle());
+            desc.setPhoto(editedDesc.getPhoto());
+            desc.setNamePhoto(editedDesc.getNamePhoto());
+            tableLen();
+            em.merge(desc);
+        }
+
     }
 
 
     private boolean tableLen(){
         String query = "SELECT COUNT(*) FROM Description";
         Query len = em.createQuery(query);
-        System.out.println(len.getMaxResults());
         return true;
     }
 
