@@ -13,9 +13,9 @@ public interface Skilldao {
 
     List<Skill> getAll();
 
-    void editSkill(Long id, Skill editedSkill);
+    void editSkill(int id, Skill editedSkill);
 
-    void deleteSkill(Long id);
+    void deleteSkill(int id);
 
     void addSkill(Skill skill);
 

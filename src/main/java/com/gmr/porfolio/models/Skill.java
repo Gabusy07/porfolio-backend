@@ -7,17 +7,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "skills")
 @ToString
-@EqualsAndHashCode
-@Data
 public class Skill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "skill_id")
+    @Getter
+    @Setter
+    private int id;
 
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "skill_name", nullable = false)
+    @Getter
+    @Setter
     private String name;
 
 }

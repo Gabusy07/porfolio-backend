@@ -29,7 +29,7 @@ public class DescriptionController {
 
     @PatchMapping("/update/{id}")
     public void updateDescription(@RequestBody Description editedDesc,
-                                  @PathVariable Long id,
+                                  @PathVariable int id,
                                   @RequestHeader(value="Authorization") String token ){
 
         if (jwt.verifyToken(token)){

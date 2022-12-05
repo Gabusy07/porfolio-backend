@@ -7,20 +7,24 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_matches")
 @ToString
-@Data
 public class UserMatch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    @Column(name = "id")
-    private Long id;
-
-
-    @Column(name = "points")
-    private int points;
+    @Column(name = "match_id")
+    @Getter
+    @Setter
+    private int id;
 
 
-    @Column(name = "avatar")
+    @Column(name = "match_points")
+    @Getter
+    @Setter
+    private short points;
+
+
+    @Column(name = "match_avatar")
+    @Getter
+    @Setter
     private String avatar;
 
 
@@ -31,6 +35,8 @@ public class UserMatch {
 
 
     @Column(name="user_id")
-    private Long userID;
+    @Getter
+    @Setter
+    private int userID;
 
 }

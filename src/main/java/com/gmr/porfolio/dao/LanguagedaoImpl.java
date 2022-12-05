@@ -25,7 +25,7 @@ public class LanguagedaoImpl implements Languagedao{
     }
 
     @Override
-    public void editLanguage(Long id, Language editedLang) {
+    public void editLanguage(int id, Language editedLang) {
         Language lang = em.find(Language.class, id);
         lang.setName(editedLang.getName());
         lang.setProgressbar(editedLang.getProgressbar());
@@ -37,7 +37,7 @@ public class LanguagedaoImpl implements Languagedao{
     }
 
     @Override
-    public void deleteLanguage(Long id) {
+    public void deleteLanguage(int id) {
 
             Language lang = em.find(Language.class, id);
             em.remove(lang);

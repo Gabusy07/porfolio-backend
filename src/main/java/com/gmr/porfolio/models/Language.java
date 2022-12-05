@@ -7,27 +7,32 @@ import javax.persistence.*;
 @Entity
 @Table(name = "languages")
 @ToString
-@EqualsAndHashCode
-@Data
+
 public class Language {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    @Column(name = "lan_id")
+    private int id;
 
-    @Column(name = "id")
-    private Long id;
 
-
-    @Column(name = "name", nullable = false)
+    @Column(name = "lan_name", nullable = false)
+    @Getter
+    @Setter
     private String name;
 
-     @Column(name = "progressbar", nullable = false)
+     @Column(name = "lan_progressbar", nullable = false)
+     @Getter @Setter
     private String progressbar;
 
-    @Column(name = "date_start", nullable = false)
+    @Column(name = "lan_date_start", nullable = false)
+    @Getter
+    @Setter
     private String date_start;
 
-    @Getter @Setter @Column(name = "width", nullable = false)
+    @Getter @Setter @Column(name = "lan_width", nullable = false)
     private int width;
 
 

@@ -14,19 +14,19 @@ public class UserMatchService {
     @Autowired
     private UserMatchDao userMatchDao;
 
-    public void setDataMatch(Long userID){
+    public void setDataMatch(int userID){
         UserMatch uMatch = new UserMatch();
         uMatch.setUserID(userID);
         uMatch.setAvatar("");
-        uMatch.setPoints(0);
+        uMatch.setPoints((short) 0);
         userMatchDao.addUserMatch(uMatch);
     }
 
-    public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void deleteUserMatch(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         userMatchDao.deleteUserMatch(idUser);
     }
 
-    public UserMatch getDataMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public UserMatch getDataMatch(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
         UserMatch m = userMatchDao.getData(idUser);
         return m;
     }

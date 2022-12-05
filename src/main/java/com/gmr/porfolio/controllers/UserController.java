@@ -17,7 +17,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import static java.lang.Integer.parseInt;
 
 
 @CrossOrigin(origins="${host}", maxAge = 3600)
@@ -42,7 +42,7 @@ public class UserController {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
         u.setPassword(passw);
         userdao.addUser(u);
-        Long id = userdao.getIDFromUser(u.getEmail());
+        int id = userdao.getIDFromUser(u.getEmail());
         String name = u.getName();
         _userMatch.setDataMatch(id);
         _userRol.setUserRoles(name, id);
@@ -55,10 +55,10 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            User user = userdao.getUser(Long.valueOf(id));
+            User user = userdao.getUser(parseInt(id));
 
-            UserMatch matchData = _userMatch.getDataMatch(Long.valueOf(id));
-            ArrayList<String> roles = _userRol.getUserRoles(Long.valueOf(id));
+            UserMatch matchData = _userMatch.getDataMatch(parseInt(id));
+            ArrayList<String> roles = _userRol.getUserRoles(parseInt(id));
 
             user.setRoles(roles);
             user.setPoints(matchData.getPoints());
@@ -75,10 +75,10 @@ public class UserController {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            int lenRoles = _userRol.getUserRoles(Long.valueOf(id)).size();
-            _userMatch.deleteUserMatch(Long.valueOf(id));
-            _userRol.deleteUserRoles(Long.valueOf(id), lenRoles);
-            userdao.deleteUser(Long.valueOf(id));
+            int lenRoles = _userRol.getUserRoles(parseInt(id)).size();
+            _userMatch.deleteUserMatch(parseInt(id));
+            _userRol.deleteUserRoles(parseInt(id), lenRoles);
+            userdao.deleteUser(parseInt(id));
 
         }
 
@@ -96,7 +96,7 @@ public class UserController {
         if (jwt.verifyToken(token)){
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
-            userdao.editUser(Long.valueOf(id), u);
+            userdao.editUser(parseInt(id), u);
 
         }
 

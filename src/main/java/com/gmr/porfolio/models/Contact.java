@@ -11,27 +11,22 @@ import javax.persistence.Id;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
-    private Long id;
+    @Getter @Setter @Column(name = "cont_id")
+    private int id;
 
     @Getter @Setter
-    @Column(name = "icon")
+    @Column(name = "cont_icon")
     private String icon;
 
-    @Getter @Setter @Column(name = "name")
+    @Getter @Setter @Column(name = "cont_name")
     private String name;
 
-    @Getter @Setter @Column(name = "link")
+    @Getter @Setter @Column(name = "cont_link")
     private String link;
 
-    @Getter @Setter @Column(name = "profile_id")
-    private Long profile_id;
+    @Getter @Setter @Column(name = "cont_profile_id")
+    private int profile_id;
 
-    @Getter @Setter @Column(name = "profile_account_id")
-    private Long account_id;
-
-    @Getter @Setter @Column(name = "profile_account_admin_id")
-    private Long admin_id;
 
 
 }

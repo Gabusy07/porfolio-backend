@@ -39,7 +39,7 @@ public class SkillController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteSkill(@PathVariable Long id,
+    public void deleteSkill(@PathVariable int id,
                             @RequestHeader(value = "Authorization") String token){
 
         if (jwt.verifyToken(token)) {
@@ -48,7 +48,7 @@ public class SkillController {
     }
 
     @PatchMapping(value = "/update/{id}")
-    public void updateSkill(@RequestBody Skill skill, @PathVariable("id") Long id,
+    public void updateSkill(@RequestBody Skill skill, @PathVariable("id") int id,
             @RequestHeader(value = "Authorization") String token){
 
         if (jwt.verifyToken(token)) {

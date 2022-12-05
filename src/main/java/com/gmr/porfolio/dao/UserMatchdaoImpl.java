@@ -27,15 +27,15 @@ public class UserMatchdaoImpl implements UserMatchDao{
     }
 
     @Override
-    public UserMatch getData(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public UserMatch getData(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        Long id = getIDFromUser(idUser);
+        int id = getIDFromUser(idUser);
         return  em.find(UserMatch.class, id);
 
     }
 
     @Override
-    public void editUserMatch(Long idUser, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void editUserMatch(int idUser, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         UserMatch m = em.find(UserMatch.class, idUser);
         m.setPoints(edited.getPoints());
@@ -46,9 +46,9 @@ public class UserMatchdaoImpl implements UserMatchDao{
     }
 
     @Override
-    public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void deleteUserMatch(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        Long id = getIDFromUser(idUser);
+        int id = getIDFromUser(idUser);
         em.remove(em.find(UserMatch.class, id));
 
     }
@@ -61,11 +61,11 @@ public class UserMatchdaoImpl implements UserMatchDao{
 
 
 
-    private Long getIDFromUser(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private int getIDFromUser(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
-        String query = "Select id FROM UserMatch m WHERE user_id= :idUser"; // clase User consulta a hibernate
+        String query = "Select match_id FROM UserMatch m WHERE m.user_id= :idUser"; // clase User consulta a hibernate
         final List list =  em.createQuery(query).setParameter("idUser", idUser).getResultList();
-        return (Long) list.get(0);
+        return (int) list.get(0);
 
     }
 }

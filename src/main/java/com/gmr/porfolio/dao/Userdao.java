@@ -17,18 +17,18 @@ import java.sql.SQLException;
 public interface Userdao {
 
 
-    void editUser(Long id, User editedUser);
+    void editUser(int id, User editedUser);
 
-    void deleteUser(Long id);
+    void deleteUser(int id);
 
     void addUser(User u) throws SQLException;
 
     User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    User getUserDataById(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    User getUserDataById(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    User getUser(Long id) ;
-    Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    User getUser(int id) ;
+    int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 
 }

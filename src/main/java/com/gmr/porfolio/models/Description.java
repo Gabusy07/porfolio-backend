@@ -6,30 +6,38 @@ import javax.persistence.*;
 @Entity
 @Table(name = "description")
 @ToString
-@EqualsAndHashCode
-@Data
 public class Description {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "desc_id")
+    @Getter
+    @Setter
+    private int id;
 
 
-    @Column(name = "text")
+    @Column(name = "desc_text")
+    @Getter
+    @Setter
     private String text;
 
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "desc_title", nullable = false)
+    @Getter
+    @Setter
     private String title;
 
 
-    @Column(name = "photo")
+    @Column(name = "desc_photo")
+    @Getter
+    @Setter
     private String photo;
 
 
-    @Column(name = "name_photo")
-    private String namePhoto;
+    @Column(name = "desc_url_photo")
+    @Getter
+    @Setter
+    private String urlPhoto;
 
 }

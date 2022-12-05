@@ -14,11 +14,11 @@ public interface UserMatchDao {
 
     public List<UserMatch> getAll();
 
-    public UserMatch getData(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public UserMatch getData(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    public void editUserMatch(Long id, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public void editUserMatch(int id, UserMatch edited) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    public void deleteUserMatch(Long idUser) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public void deleteUserMatch(int idUser) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
     public void addUserMatch(UserMatch userMatch);
 }

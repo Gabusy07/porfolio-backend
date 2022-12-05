@@ -7,26 +7,26 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user_roles")
 @ToString
-@Data
 public class UserRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long idRol;
+    @Column(name = "rol_id")
+    private int idRol;
 
 
-    @Column(name = "rol")
+    @Getter
+    @Setter
+    @Column(name = "rol_rol")
     private String rol;
-
-
 
 /*
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id" , insertable = false, updatable = false)
     private User userR;*/
 
-
+    @Getter
+    @Setter
     @Column(name = "user_id")
-    private Long userID;
+    private int userID;
 }

@@ -23,13 +23,13 @@ public class DescriptiondaoImpl implements Descriptiondao {
     }
 
     @Override
-    public void editDescription(Long id, Description editedDesc) {
+    public void editDescription(int id, Description editedDesc) {
         Description desc = em.find(Description.class, id);
         if(desc != null){
             desc.setText(editedDesc.getText());
             desc.setTitle(editedDesc.getTitle());
             desc.setPhoto(editedDesc.getPhoto());
-            desc.setNamePhoto(editedDesc.getNamePhoto());
+            desc.setUrlPhoto(editedDesc.getUrlPhoto());
             tableLen();
             em.merge(desc);
         }
@@ -38,7 +38,7 @@ public class DescriptiondaoImpl implements Descriptiondao {
             desc.setText(editedDesc.getText());
             desc.setTitle(editedDesc.getTitle());
             desc.setPhoto(editedDesc.getPhoto());
-            desc.setNamePhoto(editedDesc.getNamePhoto());
+            desc.setUrlPhoto(editedDesc.getUrlPhoto());
             tableLen();
             em.merge(desc);
         }

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 @Transactional
 public interface UserRoldao {
 
-    public ArrayList<String> getRoles(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public ArrayList<String> getRoles(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 
-    public void deleteUserRol(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    public void deleteUserRol(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
     public void addUserRol(UserRol userRol);
-    boolean isRolAdmin(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    boolean isRolAdmin(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    boolean isRolGuess(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    boolean isRolGuess(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
-    boolean isRolCommon(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
+    boolean isRolCommon(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
 }

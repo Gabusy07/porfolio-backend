@@ -25,7 +25,7 @@ public class SkilldaoImpl implements Skilldao {
     }
 
     @Override
-    public void editSkill(Long id, Skill editedSkill) {
+    public void editSkill(int id, Skill editedSkill) {
 
         Skill skill = em.find(Skill.class, id);
         skill.setName(editedSkill.getName());
@@ -35,7 +35,7 @@ public class SkilldaoImpl implements Skilldao {
     }
 
     @Override
-    public void deleteSkill(Long id) {
+    public void deleteSkill(int id) {
         Skill skill =  em.find(Skill.class, id);
         em.remove(skill);
 

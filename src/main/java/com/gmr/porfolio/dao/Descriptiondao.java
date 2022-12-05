@@ -12,6 +12,6 @@ import java.util.ArrayList;
 public interface Descriptiondao {
     ArrayList<Description> readDescription();
 
-    void editDescription(Long id, Description editedDesc);
+    void editDescription(int id, Description editedDesc);
 
 }

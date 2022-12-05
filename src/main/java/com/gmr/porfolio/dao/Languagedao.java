@@ -12,9 +12,9 @@ public interface Languagedao {
 
     ArrayList<Language> getAll();
 
-    void editLanguage(Long id, Language editedLang);
+    void editLanguage(int id, Language editedLang);
 
-    void deleteLanguage(Long id);
+    void deleteLanguage(int id);
 
     void addLanguage(Language lang);
 

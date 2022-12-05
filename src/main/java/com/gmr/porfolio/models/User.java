@@ -8,30 +8,41 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @ToString
-@Data
 public class User {
 
     @Id
-    @Column(name="id")
+    @Column(name="user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Getter
+    @Setter
+    private int id;
 
 
-    @Column(name="name", nullable = false)
+    @Column(name="user_name", nullable = false)
+    @Getter
+    @Setter
     private String name;
 
 
-    @Column(name="lastname", nullable = false)
+    @Column(name="user_lastname", nullable = false)
+    @Getter
+    @Setter
     private String lastname;
 
 
-    @Column(name="nickname", nullable = false)
+    @Column(name="user_nickname", nullable = false)
+    @Getter
+    @Setter
     private String nickname;
 
-    @Column(name="email", nullable = false, unique = true)
+    @Column(name="user_email", nullable = false, unique = true)
+    @Getter
+    @Setter
     private String email;
 
-    @Column(name="password", nullable = false)
+    @Column(name="user_password", nullable = false)
+    @Getter
+    @Setter
     private String password;
 
 
@@ -42,12 +53,16 @@ public class User {
     @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<UserRol> rol = new ArrayList<>();*/
 
-
-
+    @Getter
+    @Setter
     private ArrayList<String> roles;
 
+    @Getter
+    @Setter
     private int points;
 
+    @Getter
+    @Setter
     private String avatar;
 
 }

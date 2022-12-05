@@ -37,12 +37,12 @@ public class LanguageController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteLanguage(@PathVariable Long id){
+    public void deleteLanguage(@PathVariable int id){
         langdao.deleteLanguage(id);
     }
 
     @PatchMapping(value = "/update/{id}")
-    public void updateLanguage(@RequestBody Language lang, @PathVariable("id") Long id){
+    public void updateLanguage(@RequestBody Language lang, @PathVariable("id") int id){
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = lang.getDate_start();
