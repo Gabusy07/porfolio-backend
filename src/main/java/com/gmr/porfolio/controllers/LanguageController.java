@@ -27,7 +27,7 @@ public class LanguageController {
     public void addLanguage(@RequestBody Language lang) throws ParseException {
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
-        String date = lang.getDate_start();
+        String date = lang.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
         lang.setProgressbar((String)progressbarAndWidth.get(0));
         lang.setWidth((int)progressbarAndWidth.get(1));
@@ -45,7 +45,7 @@ public class LanguageController {
     public void updateLanguage(@RequestBody Language lang, @PathVariable("id") int id){
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
-        String date = lang.getDate_start();
+        String date = lang.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
         lang.setProgressbar((String)progressbarAndWidth.get(0));
         lang.setWidth((int)progressbarAndWidth.get(1));

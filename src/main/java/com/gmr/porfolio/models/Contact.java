@@ -11,20 +11,20 @@ import javax.persistence.Id;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "cont_id")
+    @Getter @Column(name = "cont_id")
     private int id;
 
     @Getter @Setter
-    @Column(name = "cont_icon")
+    @Column(name = "icon")
     private String icon;
 
-    @Getter @Setter @Column(name = "cont_name")
+    @Getter @Setter @Column(name = "name")
     private String name;
 
-    @Getter @Setter @Column(name = "cont_link")
+    @Getter @Setter @Column(name = "link")
     private String link;
 
-    @Getter @Setter @Column(name = "cont_profile_id")
+    @Getter @Setter @Column(name = "profile_id")
     private int profile_id;
 
 

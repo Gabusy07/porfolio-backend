@@ -2,27 +2,28 @@ package com.gmr.porfolio.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "projects")
+@ToString
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "project_id")
+    @Getter  @Column(name = "id")
     private int id;
 
     @Getter @Setter
     @Column(name = "title")
     private String title;
 
-    @Getter @Setter @Column(name = "project_image")
+    @Getter @Setter @Column(name = "image")
     private String image;
 
-    @Getter @Setter @Column(name = "profile_id")
-    private Long profile_id;
+    @Getter @Setter @Column(name = "link_project")
+    private String linkProject;
 
 }

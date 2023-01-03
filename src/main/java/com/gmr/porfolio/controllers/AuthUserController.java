@@ -1,6 +1,5 @@
 package com.gmr.porfolio.controllers;
 
-import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Token;
 import com.gmr.porfolio.models.User;
@@ -27,8 +26,6 @@ public class AuthUserController  {
     @Autowired
     private Userdao userdao;
 
-    @Autowired
-    private UserRoldao userRoldao;
     @Autowired
     private JWTutil jwt;
 
@@ -65,22 +62,7 @@ public class AuthUserController  {
 
     //-----------------------------
 
-    @GetMapping("/auth/admin")
-    public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
-        String id = jwt.getKey(token);
-        return userRoldao.isRolAdmin(parseInt(id));
-
-    }
-
-    @GetMapping("/auth/common")
-    public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-
-        String id = jwt.getKey(token);
-
-        return userRoldao.isRolCommon(parseInt(id));
-
-    }
 
     @GetMapping(value = "auth/guest")
     public Token guestToken(){

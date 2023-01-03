@@ -21,7 +21,6 @@ public class LanguagedaoImpl implements Languagedao{
         String query = "FROM Language"; // clase User consulta a hibernate
         ArrayList list = (ArrayList) em.createQuery(query).getResultList();
         return list;
-
     }
 
     @Override
@@ -29,7 +28,7 @@ public class LanguagedaoImpl implements Languagedao{
         Language lang = em.find(Language.class, id);
         lang.setName(editedLang.getName());
         lang.setProgressbar(editedLang.getProgressbar());
-        lang.setDate_start(editedLang.getDate_start());
+        lang.setDate(editedLang.getDate());
         lang.setWidth(editedLang.getWidth());
         em.merge(lang);
 
@@ -38,17 +37,14 @@ public class LanguagedaoImpl implements Languagedao{
 
     @Override
     public void deleteLanguage(int id) {
-
-            Language lang = em.find(Language.class, id);
-            em.remove(lang);
+        Language lang = em.find(Language.class, id);
+        em.remove(lang);
 
     }
 
     @Override
     public void addLanguage(Language lang) {
-        em.merge(lang);
-
-
+        em.persist(lang);
     }
 
 }

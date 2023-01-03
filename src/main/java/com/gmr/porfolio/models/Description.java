@@ -13,29 +13,28 @@ public class Description {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "desc_id")
     @Getter
-    @Setter
     private int id;
 
 
-    @Column(name = "desc_text")
+    @Column(name = "text")
     @Getter
     @Setter
     private String text;
 
 
-    @Column(name = "desc_title", nullable = false)
+    @Column(name = "title", nullable = false)
     @Getter
     @Setter
     private String title;
 
 
-    @Column(name = "desc_photo")
+    @Column(name = "photo")
     @Getter
     @Setter
     private String photo;
 
 
-    @Column(name = "desc_url_photo")
+    @Column(name = "url_photo")
     @Getter
     @Setter
     private String urlPhoto;
