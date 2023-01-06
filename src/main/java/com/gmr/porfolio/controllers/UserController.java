@@ -5,11 +5,6 @@ import com.gmr.porfolio.models.*;
 import com.gmr.porfolio.utils.JWTutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
@@ -38,27 +33,23 @@ public class UserController {
     }
 
     @GetMapping("/data")
-    public User getUser(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
+    public User getUser(@RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
-            User user = userdao.getUser(parseInt(id));
-            return user;
+            return userdao.getUser(parseInt(id));
         }
         return null;
 
     }
 
     @DeleteMapping(value = "/delete")
-    public void  deleteUser( @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public void  deleteUser( @RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)){
             userdao.deleteUser(parseInt(id));
-
         }
-
-
     }
 
 
@@ -73,10 +64,7 @@ public class UserController {
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
             u.setPassword(passw);
             userdao.editUser(parseInt(id), u);
-
         }
-
     }
-
 
 }

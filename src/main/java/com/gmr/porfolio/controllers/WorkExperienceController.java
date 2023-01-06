@@ -1,6 +1,8 @@
 package com.gmr.porfolio.controllers;
 
+import com.gmr.porfolio.dao.WorkExperiencedao;
 import com.gmr.porfolio.models.WorkExperience;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins="${host}", maxAge = 3600)
@@ -9,12 +11,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/porfolio/workExperience")
 public class WorkExperienceController {
 
+    @Autowired
+    private WorkExperiencedao wkExpDao;
+
     @PostMapping("/add")
     public void addExperience(@RequestBody WorkExperience wkExp,
                               @RequestHeader(value = "Authorization") String token){
 
+
     };
-    @GetMapping("/data}")
+    @GetMapping("/data")
     public WorkExperience getExperience(@RequestHeader(value = "Authorization") String token){
         return null;
     };

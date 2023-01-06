@@ -2,12 +2,13 @@ package com.gmr.porfolio.models;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "contacts")
+@ToString
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,5 @@ public class Contact {
 
     @Getter @Setter @Column(name = "link")
     private String link;
-
-    @Getter @Setter @Column(name = "profile_id")
-    private int profile_id;
-
-
 
 }

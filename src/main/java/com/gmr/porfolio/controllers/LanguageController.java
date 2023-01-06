@@ -25,7 +25,6 @@ public class LanguageController {
 
     @PostMapping("/add")
     public void addLanguage(@RequestBody Language lang) throws ParseException {
-
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = lang.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);

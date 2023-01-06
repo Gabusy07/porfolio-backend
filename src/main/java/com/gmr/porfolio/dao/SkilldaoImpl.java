@@ -19,9 +19,8 @@ public class SkilldaoImpl implements Skilldao {
 
     @Override
     public List<Skill> getAll() {
-        String query = "FROM Skill"; // clase User consulta a hibernate
-        ArrayList result = (ArrayList) em.createQuery(query).getResultList();
-        return result;
+        String query = "FROM Skill";
+        return (ArrayList) em.createQuery(query).getResultList();
     }
 
     @Override

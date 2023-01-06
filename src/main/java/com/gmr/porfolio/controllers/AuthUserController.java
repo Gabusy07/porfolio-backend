@@ -32,6 +32,7 @@ public class AuthUserController  {
     @PostMapping("/login")
     public Token loginUser(@RequestBody User u) throws NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
+        System.out.println(u);
         try {
             User checkedUser = userdao.getUserDataByEmail(u);
             if (checkedUser != null) {
@@ -69,4 +70,5 @@ public class AuthUserController  {
         Token token = new Token(jwt.create("0000", "xxx"));
         return token;
     }
+
 }

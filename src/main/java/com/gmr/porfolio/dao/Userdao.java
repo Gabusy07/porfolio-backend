@@ -23,12 +23,8 @@ public interface Userdao {
 
     void addUser(User u) throws SQLException;
 
-    User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
-    User getUserDataById(int id) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
     User getUser(int id) ;
     int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
+    User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 }

@@ -1,11 +1,15 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Project;
+import com.gmr.porfolio.models.Skill;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -37,5 +41,11 @@ public class ProjectdaoImpl implements Projectdao{
     public void deleteProject(int id) {
         Project p = em.find(Project.class, id);
         em.remove(p);
+    }
+
+    @Override
+    public List<Project> getAll() {
+        String query= "FROM Project";
+        return (ArrayList) em.createQuery(query).getResultList();
     }
 }
