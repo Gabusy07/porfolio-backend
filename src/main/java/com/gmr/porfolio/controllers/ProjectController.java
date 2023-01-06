@@ -50,8 +50,6 @@ public class ProjectController {
                               @PathVariable int id,
                               @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-            //System.out.println(id);
-            //System.out.println(p);
             projectdao.editProject(id, p);
         }
     };
