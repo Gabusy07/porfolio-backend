@@ -20,6 +20,10 @@ public class Project {
     @Column(name = "title")
     private String title;
 
+    @Getter @Setter
+    @Column(name = "description")
+    private String description;
+
     @Getter @Setter @Column(name = "image")
     private String image;
 

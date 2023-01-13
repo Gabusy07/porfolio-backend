@@ -31,7 +31,6 @@ public class ProjectController {
     @GetMapping("/data/{id}")
     public Project getProjects(@PathVariable("id") int id, @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-
             return projectdao.getProject(id);
         }
         return null;

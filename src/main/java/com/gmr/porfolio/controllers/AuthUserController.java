@@ -15,6 +15,8 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -71,4 +73,9 @@ public class AuthUserController  {
         return token;
     }
 
+    @GetMapping("doesExistAdmin")
+    public boolean existsAdmin(){
+        return !userdao.getAll().isEmpty();
+
+    }
 }

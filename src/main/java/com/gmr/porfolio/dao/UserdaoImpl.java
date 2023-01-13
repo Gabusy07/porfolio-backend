@@ -55,6 +55,12 @@ public class UserdaoImpl implements Userdao {
 }
 
     @Override
+    public List<User> getAll() {
+        return em.createQuery("FROM User", User.class).getResultList();
+    }
+
+
+    @Override
     public int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate

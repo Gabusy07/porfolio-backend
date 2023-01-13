@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -67,4 +68,8 @@ public class UserController {
         }
     }
 
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
+        return  userdao.getAll();
+    }
 }

@@ -27,11 +27,11 @@ public class WorkExperienceController {
             wkExpDao.addExperience(wkExp);
         }
     };
-    @GetMapping("/data/{id]")
-    public WorkExperience getExperience(@PathVariable int id,
+    @GetMapping("/data/{id}")
+    public WorkExperience getExperience(@PathVariable("id") int id,
             @RequestHeader(value = "Authorization") String token){
-
         if(jwt.verifyToken(token)){
+            System.out.println(wkExpDao.getExperience(id));
             return wkExpDao.getExperience(id);
         }
         return null;

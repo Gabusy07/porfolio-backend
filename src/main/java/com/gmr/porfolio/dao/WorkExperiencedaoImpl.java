@@ -42,6 +42,7 @@ public class WorkExperiencedaoImpl implements WorkExperiencedao{
 
     @Override
     public void deleteExperience(int id) {
-
+        WorkExperience exp = em.find(WorkExperience.class, id);
+        em.remove(exp);
     }
 }
