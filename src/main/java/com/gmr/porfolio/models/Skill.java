@@ -21,4 +21,9 @@ public class Skill {
     @Setter
     private String name;
 
+    @Getter
+    @Setter
+    @Column(name = "language")
+    private LanguageEnum language;
+
 }

@@ -5,9 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "languages")
+@Table(name = "knowledges")
 @ToString
-public class Language {
+public class Knowledge {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

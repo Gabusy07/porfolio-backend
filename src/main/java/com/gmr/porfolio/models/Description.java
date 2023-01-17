@@ -39,4 +39,9 @@ public class Description {
     @Setter
     private String urlPhoto;
 
+    @Getter
+    @Setter
+    @Column(name = "language")
+    private LanguageEnum language;
+
 }

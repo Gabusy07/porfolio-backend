@@ -1,7 +1,7 @@
 package com.gmr.porfolio.controllers;
 
-import com.gmr.porfolio.dao.Languagedao;
-import com.gmr.porfolio.models.Language;
+import com.gmr.porfolio.dao.KnowledgeDAO;
+import com.gmr.porfolio.models.Knowledge;
 import com.gmr.porfolio.services.ProgressBarDetermine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,47 +11,45 @@ import java.util.ArrayList;
 
 @CrossOrigin(origins="${host}")
 @RestController
-@RequestMapping("/porfolio/languages")
-public class LanguageController {
+@RequestMapping("/porfolio/knowledges")
+public class KnowledgeController {
 
     @Autowired
-    private Languagedao langdao;
+    private KnowledgeDAO knwdao;
 
     @GetMapping("/all")
     public ArrayList getAllLang(){
-        ArrayList languagues = langdao.getAll();
-        return new ArrayList (languagues);
+        ArrayList knowledges = knwdao.getAll();
+        return new ArrayList (knowledges);
     }
 
     @PostMapping("/add")
-    public void addLanguage(@RequestBody Language lang) throws ParseException {
+    public void addKnowledge(@RequestBody Knowledge knw) throws ParseException {
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
-        String date = lang.getDate();
+        String date = knw.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
-        lang.setProgressbar((String)progressbarAndWidth.get(0));
-        lang.setWidth((int)progressbarAndWidth.get(1));
+        knw.setProgressbar((String)progressbarAndWidth.get(0));
+        knw.setWidth((int)progressbarAndWidth.get(1));
         //llamada a dao
-        langdao.addLanguage(lang);
+        knwdao.addKnowledge(knw);
 
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteLanguage(@PathVariable int id){
-        langdao.deleteLanguage(id);
+    public void deleteKnowledge(@PathVariable int id){
+        knwdao.deleteKnowledge(id);
     }
 
     @PatchMapping(value = "/update/{id}")
-    public void updateLanguage(@RequestBody Language lang, @PathVariable("id") int id){
+    public void updateKnowledge(@RequestBody Knowledge knw, @PathVariable("id") int id){
 
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
-        String date = lang.getDate();
+        String date = knw.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
-        lang.setProgressbar((String)progressbarAndWidth.get(0));
-        lang.setWidth((int)progressbarAndWidth.get(1));
-
+        knw.setProgressbar((String)progressbarAndWidth.get(0));
+        knw.setWidth((int)progressbarAndWidth.get(1));
         //llamada a dao
-
-         langdao.editLanguage(id, lang);
+         knwdao.editKnowledge(id, knw);
 
     }
 

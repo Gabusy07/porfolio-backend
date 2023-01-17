@@ -30,4 +30,9 @@ public class Project {
     @Getter @Setter @Column(name = "link_project")
     private String linkProject;
 
+    @Getter
+    @Setter
+    @Column(name = "language")
+    private LanguageEnum language;
+
 }
