@@ -30,4 +30,6 @@ public class WorkExperience {
     @Setter
     @Column(name = "description")
     private String description;
+
+    private String language;
 }

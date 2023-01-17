@@ -17,7 +17,6 @@ import java.util.List;
 
 @Service
 @Repository
-@Transactional
 public class UserdaoImpl implements Userdao {
 
     @PersistenceContext
@@ -25,42 +24,47 @@ public class UserdaoImpl implements Userdao {
 
 
     @Override
-    public void editUser(int id, User editedUser) {
+    @Transactional
+    public User editUser(int id, User editedUser) {
         User u = em.find(User.class, id);
         u.setName(editedUser.getName());
         u.setLastname(editedUser.getLastname());
         u.setNickname(editedUser.getNickname());
         u.setEmail(editedUser.getEmail());
         u.setPassword(editedUser.getPassword());
-        em.merge(u);
-        em.close();
+        return em.merge(u);
     }
 
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         User u = em.find(User.class, id);
         em.remove(u);
     }
 
     @Override
+    @Transactional
     public void addUser(User u) {
         //agrega a DDBB
         em.persist(u);
     }
 
+    @Transactional
     public User getUser(int id){
         User u = em.find(User.class, id);
         return u;
 }
 
     @Override
+    @Transactional
     public List<User> getAll() {
         return em.createQuery("FROM User", User.class).getResultList();
     }
 
 
     @Override
+    @Transactional
     public int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate
@@ -73,6 +77,7 @@ public class UserdaoImpl implements Userdao {
     }
 
     @Override
+    @Transactional
     public User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "FROM User WHERE email= :email";
