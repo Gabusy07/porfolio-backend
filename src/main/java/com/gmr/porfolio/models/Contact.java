@@ -26,6 +26,11 @@ public class Contact {
 
     public static class Builder {
         private Contact contact = new Contact();
+
+        public Contact.Builder setId(int id) {
+            contact.id = id;
+            return this;
+        }
         public Contact.Builder setIcon(String icon) {
             contact.icon = icon;
             return this;

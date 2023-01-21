@@ -34,6 +34,11 @@ public class User {
 
     public static class Builder {
         private User user = new User();
+
+        public Builder setId(int id) {
+            user.id = id;
+            return this;
+        }
         public Builder setName(String username) {
             user.name = username;
             return this;

@@ -18,7 +18,7 @@ import java.util.List;
 public interface Userdao {
 
 
-    User editUser(int id, User editedUser);
+    User editUser(int id, User editedUser, String password);
 
     void deleteUser(int id);
 

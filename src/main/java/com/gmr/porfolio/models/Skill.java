@@ -26,6 +26,11 @@ public class Skill {
 
     public static class Builder {
         private Skill skill = new Skill();
+
+        public Skill.Builder setId(int id) {
+            skill.id = id;
+            return this;
+        }
         public Skill.Builder setName(String name) {
             skill.name = name;
             return this;

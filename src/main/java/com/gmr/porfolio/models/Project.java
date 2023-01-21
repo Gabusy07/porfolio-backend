@@ -36,6 +36,11 @@ public class Project {
 
     public static class Builder {
         private Project project = new Project();
+
+        public Project.Builder setId(int id) {
+            project.id = id;
+            return this;
+        }
         public Project.Builder setTitle(String title) {
             project.title = title;
             return this;

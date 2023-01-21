@@ -30,10 +30,16 @@ public class WorkExperience {
     @Column(name = "language")
     private LanguageEnum language;
 
-    private WorkExperience() {}
+    public WorkExperience() {}
+
 
     public static class Builder {
         private WorkExperience wk = new WorkExperience();
+
+        public WorkExperience.Builder setId(int id) {
+            wk.id = id;
+            return this;
+        }
         public WorkExperience.Builder setTitle(String title) {
             wk.title = title;
             return this;
@@ -46,7 +52,7 @@ public class WorkExperience {
             wk.description = description;
             return this;
         }
-        public WorkExperience.Builder setNickname(LanguageEnum lang) {
+        public WorkExperience.Builder setLang(LanguageEnum lang) {
             wk.language = lang;
             return this;
         }

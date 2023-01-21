@@ -27,6 +27,10 @@ public class SkilldaoImpl implements Skilldao {
     public void editSkill(int id, Skill editedSkill) {
         Skill skill = em.find(Skill.class, id);
         //skill.setName(editedSkill.getName());
+        skill = new Skill.Builder().setId(skill.getId())
+                .setName(skill.getName())
+                .setLanguage(skill.getLanguage())
+                        .build();
         em.merge(skill);
 
     }

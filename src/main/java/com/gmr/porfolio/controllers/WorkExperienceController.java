@@ -22,7 +22,8 @@ public class WorkExperienceController {
 
     @PostMapping("/add")
     public void addExperience(@RequestBody WorkExperience wkExp,
-                              @RequestHeader(value = "Authorization") String token){
+                              @RequestHeader(value = "Authorization") String token)
+    {
         if(jwt.verifyToken(token)){
             wkExpDao.addExperience(wkExp);
         }
@@ -31,7 +32,6 @@ public class WorkExperienceController {
     public WorkExperience getExperience(@PathVariable("id") int id,
             @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-            System.out.println(wkExpDao.getExperience(id));
             return wkExpDao.getExperience(id);
         }
         return null;

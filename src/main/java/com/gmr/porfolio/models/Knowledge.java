@@ -31,6 +31,11 @@ public class Knowledge {
 
     public static class Builder {
         private Knowledge k = new Knowledge();
+
+        public Knowledge.Builder setId(int id) {
+            k.id = id;
+            return this;
+        }
         public Knowledge.Builder setName(String name) {
             k.name = name;
             return this;

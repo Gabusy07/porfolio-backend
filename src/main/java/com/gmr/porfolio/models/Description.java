@@ -36,6 +36,11 @@ public class Description {
 
     public static class Builder {
         private Description desc = new Description();
+
+        public Description.Builder setId(int id) {
+            desc.id = id;
+            return this;
+        }
         public Description.Builder setTitle(String title) {
             desc.title = title;
             return this;

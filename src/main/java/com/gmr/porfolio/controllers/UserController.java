@@ -30,7 +30,12 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<Void> addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
-        //u.setPassword(passw);
+        u = new User.Builder().setName(u.getName())
+                .setLastname(u.getLastname())
+                .setPassword(passw)
+                .setEmail(u.getEmail())
+                .setNickname(u.getNickname())
+                .build();
         userdao.addUser(u);
         return new ResponseEntity(HttpStatus.CREATED);
 
@@ -65,8 +70,7 @@ public class UserController {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)) {
             String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
-            //u.setPassword(passw);
-            if (userdao.editUser(parseInt(id), u) == null) {
+            if (userdao.editUser(parseInt(id), u, passw) == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         }

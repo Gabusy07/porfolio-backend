@@ -29,6 +29,11 @@ public class KnowledgeDAOImpl implements KnowledgeDAO{
         //knowledge.setProgressbar(editedKnw.getProgressbar());
         //knowledge.setDate(editedKnw.getDate());
         //knowledge.setWidth(editedKnw.getWidth());
+        knowledge = new Knowledge.Builder().setId(knowledge.getId())
+                        .setName(knowledge.getName())
+                        .setDate(knowledge.getDate())
+                       .setProgressbar(knowledge.getProgressbar())
+                       .setWidth(knowledge.getWidth()).build();
         em.merge(knowledge);
 
 

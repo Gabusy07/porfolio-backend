@@ -11,8 +11,5 @@ public class Application {
 
 	public static void main(String[] args)  {
 		SpringApplication.run(Application.class, args);
-		Skill u = new Skill.Builder().setName("pablo").setLanguage(LanguageEnum.ENGLISH).build();
-		System.out.println(u.getName());
-		System.out.println(u.getLanguage());
 	}
 }

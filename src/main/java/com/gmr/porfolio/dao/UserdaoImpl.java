@@ -25,8 +25,13 @@ public class UserdaoImpl implements Userdao {
 
     @Override
     @Transactional
-    public User editUser(int id, User editedUser) {
-        User u = em.find(User.class, id);
+    public User editUser(int id, User editedUser, String password) {
+        User u = new User.Builder().setId(id).setName(editedUser.getName())
+                .setLastname(editedUser.getLastname())
+                .setEmail(editedUser.getEmail())
+                .setNickname(editedUser.getNickname())
+                .setPassword(password)
+                .build();
         //u.setName(editedUser.getName());
        // u.setLastname(editedUser.getLastname());
         //u.setNickname(editedUser.getNickname());

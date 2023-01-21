@@ -31,15 +31,10 @@ public class DescriptiondaoImpl implements Descriptiondao {
            // desc.setPhoto(editedDesc.getPhoto());
            // desc.setUrlPhoto(editedDesc.getUrlPhoto());
             tableLen();
-            em.merge(desc);
-        }
-        else{
-            desc = new Description();
-            //desc.setText(editedDesc.getText());
-            //desc.setTitle(editedDesc.getTitle());
-            //desc.setPhoto(editedDesc.getPhoto());
-            //desc.setUrlPhoto(editedDesc.getUrlPhoto());
-            tableLen();
+            desc = new Description.Builder().setId(desc.getId())
+                            .setTitle(desc.getTitle())
+                            .setText(desc.getText()).setPhoto(desc.getPhoto())
+                            .setUrlPhoto(desc.getUrlPhoto()).setLanguage(desc.getLanguage()).build();
             em.merge(desc);
         }
 

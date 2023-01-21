@@ -34,6 +34,12 @@ public class ProjectdaoImpl implements Projectdao{
         //p.setTitle(editedProject.getTitle());
        // p.setImage(editedProject.getImage());
         //p.setLinkProject(editedProject.getLinkProject());
+        p = new Project.Builder().setId(p.getId()).setTitle(p.getTitle())
+                        .setDescription(p.getDescription())
+                        .setLanguage(p.getLanguage())
+                        .setImage(p.getImage())
+                        .setLinkProject(p.getLinkProject())
+                                        .build();
         em.merge(p);
     }
 
