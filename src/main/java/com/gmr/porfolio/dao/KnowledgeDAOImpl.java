@@ -25,10 +25,10 @@ public class KnowledgeDAOImpl implements KnowledgeDAO{
     @Override
     public void editKnowledge(int id, Knowledge editedKnw) {
         Knowledge knowledge = em.find(Knowledge.class, id);
-        knowledge.setName(editedKnw.getName());
-        knowledge.setProgressbar(editedKnw.getProgressbar());
-        knowledge.setDate(editedKnw.getDate());
-        knowledge.setWidth(editedKnw.getWidth());
+        //knowledge.setName(editedKnw.getName());
+        //knowledge.setProgressbar(editedKnw.getProgressbar());
+        //knowledge.setDate(editedKnw.getDate());
+        //knowledge.setWidth(editedKnw.getWidth());
         em.merge(knowledge);
 
 

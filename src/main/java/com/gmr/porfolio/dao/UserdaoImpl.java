@@ -27,11 +27,11 @@ public class UserdaoImpl implements Userdao {
     @Transactional
     public User editUser(int id, User editedUser) {
         User u = em.find(User.class, id);
-        u.setName(editedUser.getName());
-        u.setLastname(editedUser.getLastname());
-        u.setNickname(editedUser.getNickname());
-        u.setEmail(editedUser.getEmail());
-        u.setPassword(editedUser.getPassword());
+        //u.setName(editedUser.getName());
+       // u.setLastname(editedUser.getLastname());
+        //u.setNickname(editedUser.getNickname());
+        //u.setEmail(editedUser.getEmail());
+       // u.setPassword(editedUser.getPassword());
         return em.merge(u);
     }
 

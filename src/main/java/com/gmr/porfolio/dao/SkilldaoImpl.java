@@ -26,7 +26,7 @@ public class SkilldaoImpl implements Skilldao {
     @Override
     public void editSkill(int id, Skill editedSkill) {
         Skill skill = em.find(Skill.class, id);
-        skill.setName(editedSkill.getName());
+        //skill.setName(editedSkill.getName());
         em.merge(skill);
 
     }

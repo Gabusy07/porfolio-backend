@@ -26,19 +26,19 @@ public class DescriptiondaoImpl implements Descriptiondao {
     public void editDescription(int id, Description editedDesc) {
         Description desc = em.find(Description.class, id);
         if(desc != null){
-            desc.setText(editedDesc.getText());
-            desc.setTitle(editedDesc.getTitle());
-            desc.setPhoto(editedDesc.getPhoto());
-            desc.setUrlPhoto(editedDesc.getUrlPhoto());
+            //desc.setText(editedDesc.getText());
+            //desc.setTitle(editedDesc.getTitle());
+           // desc.setPhoto(editedDesc.getPhoto());
+           // desc.setUrlPhoto(editedDesc.getUrlPhoto());
             tableLen();
             em.merge(desc);
         }
         else{
             desc = new Description();
-            desc.setText(editedDesc.getText());
-            desc.setTitle(editedDesc.getTitle());
-            desc.setPhoto(editedDesc.getPhoto());
-            desc.setUrlPhoto(editedDesc.getUrlPhoto());
+            //desc.setText(editedDesc.getText());
+            //desc.setTitle(editedDesc.getTitle());
+            //desc.setPhoto(editedDesc.getPhoto());
+            //desc.setUrlPhoto(editedDesc.getUrlPhoto());
             tableLen();
             em.merge(desc);
         }

@@ -31,9 +31,9 @@ public class ProjectdaoImpl implements Projectdao{
     @Override
     public void editProject(int id, Project editedProject) {
         Project p = em.find(Project.class, id);
-        p.setTitle(editedProject.getTitle());
-        p.setImage(editedProject.getImage());
-        p.setLinkProject(editedProject.getLinkProject());
+        //p.setTitle(editedProject.getTitle());
+       // p.setImage(editedProject.getImage());
+        //p.setLinkProject(editedProject.getLinkProject());
         em.merge(p);
     }
 

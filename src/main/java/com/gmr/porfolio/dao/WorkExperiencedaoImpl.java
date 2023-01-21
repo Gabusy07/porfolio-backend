@@ -34,9 +34,9 @@ public class WorkExperiencedaoImpl implements WorkExperiencedao{
     @Override
     public void editExperience(int id, WorkExperience wkExp) {
         WorkExperience exp = em.find(WorkExperience.class, id);
-        exp.setTitle(wkExp.getTitle());
-        exp.setDescription(wkExp.getDescription());
-        exp.setPlace(wkExp.getPlace());
+        //exp.setTitle(wkExp.getTitle());
+        //exp.setDescription(wkExp.getDescription());
+        //exp.setPlace(wkExp.getPlace());
         em.merge(exp);
     }
 

@@ -15,10 +15,6 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 @CrossOrigin(origins="${host}")
 @RestController
