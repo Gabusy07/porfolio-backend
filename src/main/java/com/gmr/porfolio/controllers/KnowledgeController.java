@@ -28,10 +28,13 @@ public class KnowledgeController {
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = knw.getDate();
         ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
+        Knowledge newKnw = new Knowledge.Builder().setId(knw.getId()).setName(knw.getName())
+                        .setDate(knw.getDate()).setProgressbar((String) progressbarAndWidth.get(0))
+                        .setWidth((Integer) progressbarAndWidth.get(1)).build();
         //knw.setProgressbar((String)progressbarAndWidth.get(0));
         //knw.setWidth((int)progressbarAndWidth.get(1));
         //llamada a dao
-        knwdao.addKnowledge(knw);
+        knwdao.addKnowledge(newKnw);
 
     }
 

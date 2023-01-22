@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 
 @Repository
-@Transactional
 public interface Descriptiondao {
+
+    @Transactional
     ArrayList<Description> readDescription();
 
+    @Transactional
     void editDescription(int id, Description editedDesc);
 
 }

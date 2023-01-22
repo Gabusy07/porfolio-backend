@@ -20,7 +20,7 @@ public class SkilldaoImpl implements Skilldao {
     @Override
     public List<Skill> getAll() {
         String query = "FROM Skill";
-        return (ArrayList) em.createQuery(query).getResultList();
+        return em.createQuery(query).getResultList();
     }
 
     @Override

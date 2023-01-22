@@ -3,9 +3,6 @@ package com.gmr.porfolio.dao;
 import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -15,7 +12,6 @@ import java.security.spec.InvalidKeySpecException;
 
 import java.util.List;
 
-@Service
 @Repository
 public class UserdaoImpl implements Userdao {
 
