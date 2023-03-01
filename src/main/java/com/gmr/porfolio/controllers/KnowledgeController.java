@@ -46,11 +46,6 @@ public class KnowledgeController {
     @PatchMapping(value = "/update/{id}")
     public void updateKnowledge(@RequestBody Knowledge knw, @PathVariable("id") int id){
 
-        //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
-        String date = knw.getDate();
-        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
-        //knw.setProgressbar((String)progressbarAndWidth.get(0));
-        //knw.setWidth((int)progressbarAndWidth.get(1));
         //llamada a dao
          knwdao.editKnowledge(id, knw);
 

@@ -1,6 +1,7 @@
 package com.gmr.porfolio.dao;
 
 import com.gmr.porfolio.models.Knowledge;
+import com.gmr.porfolio.services.ProgressBarDetermine;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,18 +25,21 @@ public class KnowledgeDAOImpl implements KnowledgeDAO{
 
     @Override
     public void editKnowledge(int id, Knowledge editedKnw) {
+        //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
+        String date = editedKnw.getDate();
+        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
+        System.out.println(progressbarAndWidth);
+
+        String pb = (String) progressbarAndWidth.get(0);
+        int width = (int) progressbarAndWidth.get(1);
+        System.out.println(width+3);
         Knowledge knowledge = em.find(Knowledge.class, id);
-        //knowledge.setName(editedKnw.getName());
-        //knowledge.setProgressbar(editedKnw.getProgressbar());
-        //knowledge.setDate(editedKnw.getDate());
-        //knowledge.setWidth(editedKnw.getWidth());
         knowledge = new Knowledge.Builder().setId(knowledge.getId())
                         .setName(knowledge.getName())
                         .setDate(knowledge.getDate())
-                       .setProgressbar(knowledge.getProgressbar())
-                       .setWidth(knowledge.getWidth()).build();
+                       .setProgressbar(pb)
+                       .setWidth(width).build();
         em.merge(knowledge);
-
 
     }
 

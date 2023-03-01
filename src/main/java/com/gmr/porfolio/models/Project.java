@@ -16,7 +16,7 @@ public class Project {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
 
@@ -26,12 +26,15 @@ public class Project {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "link_project")
+    @Column(name = "link_project", unique = true)
     private String linkProject;
 
 
     @Column(name = "language")
     private LanguageEnum language;
+
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
 
 
     public static class Builder {
@@ -59,6 +62,11 @@ public class Project {
         }
         public Project.Builder setLanguage(LanguageEnum lang) {
             project.language = lang;
+            return this;
+        }
+
+        public Project.Builder setEnabled(boolean enabled) {
+            project.enabled = enabled;
             return this;
         }
 

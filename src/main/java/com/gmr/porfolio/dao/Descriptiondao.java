@@ -14,6 +14,6 @@ public interface Descriptiondao {
     ArrayList<Description> readDescription();
 
     @Transactional
-    void editDescription(int id, Description editedDesc);
+    void replaceDescription( Description editedDesc);
 
 }

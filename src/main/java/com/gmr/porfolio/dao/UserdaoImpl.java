@@ -28,11 +28,6 @@ public class UserdaoImpl implements Userdao {
                 .setNickname(editedUser.getNickname())
                 .setPassword(password)
                 .build();
-        //u.setName(editedUser.getName());
-       // u.setLastname(editedUser.getLastname());
-        //u.setNickname(editedUser.getNickname());
-        //u.setEmail(editedUser.getEmail());
-       // u.setPassword(editedUser.getPassword());
         return em.merge(u);
     }
 
@@ -53,8 +48,7 @@ public class UserdaoImpl implements Userdao {
 
     @Transactional
     public User getUser(int id){
-        User u = em.find(User.class, id);
-        return u;
+        return em.find(User.class, id);
 }
 
     @Override
@@ -74,7 +68,6 @@ public class UserdaoImpl implements Userdao {
             return -1;
         }
         return (int) list.get(0);
-
     }
 
     @Override

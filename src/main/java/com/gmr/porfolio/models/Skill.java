@@ -20,7 +20,7 @@ public class Skill {
     private String name;
 
 
-    @Column(name = "language")
+    @Column(name = "language", nullable = false)
     private LanguageEnum language;
 
 
