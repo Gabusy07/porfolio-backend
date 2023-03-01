@@ -31,7 +31,6 @@ public class ProjectController {
     @GetMapping("/data/{id}")
     public Project getProjects(@PathVariable("id") int id, @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-
             return projectdao.getProject(id);
         }
         return null;
@@ -50,8 +49,6 @@ public class ProjectController {
                               @PathVariable int id,
                               @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-            //System.out.println(id);
-            //System.out.println(p);
             projectdao.editProject(id, p);
         }
     };

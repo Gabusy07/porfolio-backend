@@ -16,8 +16,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.spec.InvalidKeySpecException;
 
-import static java.lang.Integer.parseInt;
-
 @CrossOrigin(origins="${host}")
 @RestController
 @RequestMapping("/porfolio/api")
@@ -71,4 +69,9 @@ public class AuthUserController  {
         return token;
     }
 
+    @GetMapping("doesExistAdmin")
+    public boolean existsAdmin(){
+        return !userdao.getAll().isEmpty();
+
+    }
 }

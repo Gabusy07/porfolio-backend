@@ -3,9 +3,6 @@ package com.gmr.porfolio.dao;
 import com.gmr.porfolio.models.Encrypt;
 import com.gmr.porfolio.models.User;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -15,9 +12,7 @@ import java.security.spec.InvalidKeySpecException;
 
 import java.util.List;
 
-@Service
 @Repository
-@Transactional
 public class UserdaoImpl implements Userdao {
 
     @PersistenceContext
@@ -25,36 +20,46 @@ public class UserdaoImpl implements Userdao {
 
 
     @Override
-    public void editUser(int id, User editedUser) {
-        User u = em.find(User.class, id);
-        u.setName(editedUser.getName());
-        u.setLastname(editedUser.getLastname());
-        u.setNickname(editedUser.getNickname());
-        u.setEmail(editedUser.getEmail());
-        u.setPassword(editedUser.getPassword());
-        em.merge(u);
-        em.close();
+    @Transactional
+    public User editUser(int id, User editedUser, String password) {
+        User u = new User.Builder().setId(id).setName(editedUser.getName())
+                .setLastname(editedUser.getLastname())
+                .setEmail(editedUser.getEmail())
+                .setNickname(editedUser.getNickname())
+                .setPassword(password)
+                .build();
+        return em.merge(u);
     }
 
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         User u = em.find(User.class, id);
         em.remove(u);
     }
 
     @Override
+    @Transactional
     public void addUser(User u) {
         //agrega a DDBB
         em.persist(u);
     }
 
+    @Transactional
     public User getUser(int id){
-        User u = em.find(User.class, id);
-        return u;
+        return em.find(User.class, id);
 }
 
     @Override
+    @Transactional
+    public List<User> getAll() {
+        return em.createQuery("FROM User", User.class).getResultList();
+    }
+
+
+    @Override
+    @Transactional
     public int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "Select id FROM User m WHERE m.email= :email"; // clase User consulta a hibernate
@@ -63,10 +68,10 @@ public class UserdaoImpl implements Userdao {
             return -1;
         }
         return (int) list.get(0);
-
     }
 
     @Override
+    @Transactional
     public User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         String query = "FROM User WHERE email= :email";

@@ -6,52 +6,63 @@ import javax.persistence.*;
 @Entity
 @Table(name = "users")
 @ToString
-@NoArgsConstructor
+@Getter
 public class User {
-
-    User(String name,String lastname, String nickname, String email, String password){
-       this.name = name;
-       this.lastname = lastname;
-       this.nickname = nickname;
-       this.email = email;
-       this.password = password;
-    }
 
     @Id
     @Column(name="id")
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Setter
     private int id;
 
-
-
     @Column(name="name", nullable = false)
-    @Getter
-    @Setter
     private String name;
 
-
     @Column(name="lastname", nullable = false)
-    @Getter
-    @Setter
     private String lastname;
 
-
     @Column(name="nickname", nullable = false)
-    @Getter
-    @Setter
     private String nickname;
 
     @Column(name="email", nullable = false, unique = true)
-    @Getter
-    @Setter
     private String email;
 
     @Column(name="password", nullable = false)
-    @Getter
-    @Setter
     private String password;
 
+    private User() {}
 
+    public static class Builder {
+        private User user = new User();
+
+        public Builder setId(int id) {
+            user.id = id;
+            return this;
+        }
+        public Builder setName(String username) {
+            user.name = username;
+            return this;
+        }
+        public Builder setEmail(String email) {
+            user.email = email;
+            return this;
+        }
+        public Builder setLastname(String lastname) {
+            user.lastname = lastname;
+            return this;
+        }
+        public Builder setNickname(String nickname) {
+            user.nickname = nickname;
+            return this;
+        }
+        public Builder setPassword(String password) {
+            user.password = password;
+            return this;
+        }
+
+        public User build() {
+            return user;
+        }
+    }
 }
+

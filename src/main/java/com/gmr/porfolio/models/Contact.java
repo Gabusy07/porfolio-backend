@@ -1,28 +1,52 @@
 package com.gmr.porfolio.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "contacts")
 @ToString
+@Getter
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Column(name = "cont_id")
+    @Column(name = "cont_id")
     private int id;
 
-    @Getter @Setter
     @Column(name = "icon")
     private String icon;
 
-    @Getter @Setter @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-    @Getter @Setter @Column(name = "link")
+    @Column(name = "link")
     private String link;
+
+    public static class Builder {
+        private Contact contact = new Contact();
+
+        public Contact.Builder setId(int id) {
+            contact.id = id;
+            return this;
+        }
+        public Contact.Builder setIcon(String icon) {
+            contact.icon = icon;
+            return this;
+        }
+        public Contact.Builder setName(String name) {
+            contact.name = name;
+            return this;
+        }
+        public Contact.Builder setLink(String link) {
+            contact.link = link;
+            return this;
+        }
+
+        public Contact build() {
+            return contact;
+        }
+    }
 
 }

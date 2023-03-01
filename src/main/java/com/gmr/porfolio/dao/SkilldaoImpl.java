@@ -20,13 +20,17 @@ public class SkilldaoImpl implements Skilldao {
     @Override
     public List<Skill> getAll() {
         String query = "FROM Skill";
-        return (ArrayList) em.createQuery(query).getResultList();
+        return em.createQuery(query).getResultList();
     }
 
     @Override
     public void editSkill(int id, Skill editedSkill) {
         Skill skill = em.find(Skill.class, id);
-        skill.setName(editedSkill.getName());
+        //skill.setName(editedSkill.getName());
+        skill = new Skill.Builder().setId(skill.getId())
+                .setName(skill.getName())
+                .setLanguage(skill.getLanguage())
+                        .build();
         em.merge(skill);
 
     }
