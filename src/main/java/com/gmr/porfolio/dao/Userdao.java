@@ -11,23 +11,23 @@ import java.security.NoSuchAlgorithmException;
 
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 @Transactional
 public interface Userdao {
 
 
-    void editUser(Long id, User editedUser);
+    User editUser(int id, User editedUser, String password);
 
-    void deleteUser(Long id);
+    void deleteUser(int id);
 
     void addUser(User u) throws SQLException;
 
+    User getUser(int id);
+
+    List<User> getAll();
+    int getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
     User getUserDataByEmail(User u) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
-    User getUserDataById(Long id) throws NoSuchAlgorithmException, InvalidKeySpecException;
-
-    User getUser(Long id) ;
-    Long getIDFromUser(String email) throws NoSuchAlgorithmException, InvalidKeySpecException;
 
 }

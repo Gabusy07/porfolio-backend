@@ -26,14 +26,12 @@ public class DescriptionController {
     }
 
 
-
-    @PatchMapping("/update/{id}")
+    @PostMapping("/update")
     public void updateDescription(@RequestBody Description editedDesc,
-                                  @PathVariable Long id,
                                   @RequestHeader(value="Authorization") String token ){
 
         if (jwt.verifyToken(token)){
-            descriptiondao.editDescription(id, editedDesc);
+            descriptiondao.replaceDescription(editedDesc);
         }
     }
 

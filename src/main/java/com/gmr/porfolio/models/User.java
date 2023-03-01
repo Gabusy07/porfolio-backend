@@ -2,32 +2,24 @@ package com.gmr.porfolio.models;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-
-import java.util.List;
-
 
 @Entity
 @Table(name = "users")
 @ToString
-@Data
+@Getter
 public class User {
 
     @Id
     @Column(name="id")
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-
+    @Setter
+    private int id;
 
     @Column(name="name", nullable = false)
     private String name;
 
-
     @Column(name="lastname", nullable = false)
     private String lastname;
-
 
     @Column(name="nickname", nullable = false)
     private String nickname;
@@ -38,21 +30,39 @@ public class User {
     @Column(name="password", nullable = false)
     private String password;
 
+    private User() {}
 
-/*
-    @OneToOne(mappedBy = "userM", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private UserMatch match = new UserMatch();
+    public static class Builder {
+        private User user = new User();
 
-    @OneToMany(mappedBy = "userR", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<UserRol> rol = new ArrayList<>();*/
+        public Builder setId(int id) {
+            user.id = id;
+            return this;
+        }
+        public Builder setName(String username) {
+            user.name = username;
+            return this;
+        }
+        public Builder setEmail(String email) {
+            user.email = email;
+            return this;
+        }
+        public Builder setLastname(String lastname) {
+            user.lastname = lastname;
+            return this;
+        }
+        public Builder setNickname(String nickname) {
+            user.nickname = nickname;
+            return this;
+        }
+        public Builder setPassword(String password) {
+            user.password = password;
+            return this;
+        }
 
-
-
-    private ArrayList<String> roles;
-
-
-    private int points;
-
-    private String avatar;
-
+        public User build() {
+            return user;
+        }
+    }
 }
+

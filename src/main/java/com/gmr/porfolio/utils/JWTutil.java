@@ -95,6 +95,5 @@ public class JWTutil {
     public boolean verifyToken(String token) {
         String userId = this.getKey(token);
         return userId != null;
-
     }
 }

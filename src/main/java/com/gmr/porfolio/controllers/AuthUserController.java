@@ -1,6 +1,5 @@
 package com.gmr.porfolio.controllers;
 
-import com.gmr.porfolio.dao.UserRoldao;
 import com.gmr.porfolio.dao.Userdao;
 import com.gmr.porfolio.models.Token;
 import com.gmr.porfolio.models.User;
@@ -26,13 +25,12 @@ public class AuthUserController  {
     private Userdao userdao;
 
     @Autowired
-    private UserRoldao userRoldao;
-    @Autowired
     private JWTutil jwt;
 
     @PostMapping("/login")
     public Token loginUser(@RequestBody User u) throws NoSuchPaddingException, IllegalBlockSizeException, UnsupportedEncodingException, BadPaddingException, InvalidKeyException, NoSuchProviderException {
 
+        System.out.println(u);
         try {
             User checkedUser = userdao.getUserDataByEmail(u);
             if (checkedUser != null) {
@@ -63,22 +61,7 @@ public class AuthUserController  {
 
     //-----------------------------
 
-    @GetMapping("/auth/admin")
-    public boolean isAdmin(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
 
-        String id = jwt.getKey(token);
-        return userRoldao.isRolAdmin(Long.valueOf(id));
-
-    }
-
-    @GetMapping("/auth/common")
-    public boolean isCommon(@RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
-
-        String id = jwt.getKey(token);
-
-        return userRoldao.isRolCommon(Long.valueOf(id));
-
-    }
 
     @GetMapping(value = "auth/guest")
     public Token guestToken(){
@@ -86,4 +69,9 @@ public class AuthUserController  {
         return token;
     }
 
+    @GetMapping("doesExistAdmin")
+    public boolean existsAdmin(){
+        return !userdao.getAll().isEmpty();
+
+    }
 }

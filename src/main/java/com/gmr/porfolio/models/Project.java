@@ -1,35 +1,78 @@
 package com.gmr.porfolio.models;
 
 import lombok.Getter;
-import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "projects")
+@ToString
+@Getter
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
-    private Long id;
+    @Column(name = "id")
+    private int id;
 
-    @Getter @Setter
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Getter @Setter @Column(name = "image")
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "image")
     private String image;
 
-    @Getter @Setter @Column(name = "profile_id")
-    private Long profile_id;
+    @Column(name = "link_project", unique = true)
+    private String linkProject;
 
-    @Getter @Setter @Column(name = "profile_account_id")
-    private Long account_id;
 
-    @Getter @Setter @Column(name = "profile_account_admin_id")
-    private Long admin_id;
+    @Column(name = "language")
+    private LanguageEnum language;
 
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
+
+
+    public static class Builder {
+        private Project project = new Project();
+
+        public Project.Builder setId(int id) {
+            project.id = id;
+            return this;
+        }
+        public Project.Builder setTitle(String title) {
+            project.title = title;
+            return this;
+        }
+        public Project.Builder setDescription(String description) {
+            project.description = description;
+            return this;
+        }
+        public Project.Builder setImage(String image) {
+            project.image = image;
+            return this;
+        }
+        public Project.Builder setLinkProject(String linkProject) {
+            project.linkProject = linkProject;
+            return this;
+        }
+        public Project.Builder setLanguage(LanguageEnum lang) {
+            project.language = lang;
+            return this;
+        }
+
+        public Project.Builder setEnabled(boolean enabled) {
+            project.enabled = enabled;
+            return this;
+        }
+
+        public Project build() {
+            return project;
+        }
+    }
 
 }

@@ -19,23 +19,24 @@ public class SkilldaoImpl implements Skilldao {
 
     @Override
     public List<Skill> getAll() {
-        String query = "FROM Skill"; // clase User consulta a hibernate
-        ArrayList result = (ArrayList) em.createQuery(query).getResultList();
-        return result;
+        String query = "FROM Skill";
+        return em.createQuery(query).getResultList();
     }
 
     @Override
-    public void editSkill(Long id, Skill editedSkill) {
-
+    public void editSkill(int id, Skill editedSkill) {
         Skill skill = em.find(Skill.class, id);
-        skill.setName(editedSkill.getName());
+        //skill.setName(editedSkill.getName());
+        skill = new Skill.Builder().setId(skill.getId())
+                .setName(skill.getName())
+                .setLanguage(skill.getLanguage())
+                        .build();
         em.merge(skill);
 
-
     }
 
     @Override
-    public void deleteSkill(Long id) {
+    public void deleteSkill(int id) {
         Skill skill =  em.find(Skill.class, id);
         em.remove(skill);
 
@@ -44,8 +45,7 @@ public class SkilldaoImpl implements Skilldao {
 
     @Override
     public void addSkill(Skill skill) {
-        em.merge(skill);
-
+        em.persist(skill);
 
     }
 }

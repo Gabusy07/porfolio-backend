@@ -1,37 +1,52 @@
 package com.gmr.porfolio.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "contacts")
+@ToString
+@Getter
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "id")
-    private Long id;
+    @Column(name = "cont_id")
+    private int id;
 
-    @Getter @Setter
     @Column(name = "icon")
     private String icon;
 
-    @Getter @Setter @Column(name = "name")
+    @Column(name = "name")
     private String name;
 
-    @Getter @Setter @Column(name = "link")
+    @Column(name = "link")
     private String link;
 
-    @Getter @Setter @Column(name = "profile_id")
-    private Long profile_id;
+    public static class Builder {
+        private Contact contact = new Contact();
 
-    @Getter @Setter @Column(name = "profile_account_id")
-    private Long account_id;
+        public Contact.Builder setId(int id) {
+            contact.id = id;
+            return this;
+        }
+        public Contact.Builder setIcon(String icon) {
+            contact.icon = icon;
+            return this;
+        }
+        public Contact.Builder setName(String name) {
+            contact.name = name;
+            return this;
+        }
+        public Contact.Builder setLink(String link) {
+            contact.link = link;
+            return this;
+        }
 
-    @Getter @Setter @Column(name = "profile_account_admin_id")
-    private Long admin_id;
-
+        public Contact build() {
+            return contact;
+        }
+    }
 
 }
