@@ -68,9 +68,8 @@ public class AuthUserController  {
         return token;
     }
 
-    @GetMapping("doesExistAdmin")
+    @GetMapping("/doesExistAdmin")
     public boolean existsAdmin(){
         return !userdao.getAll().isEmpty();
-
     }
 }
