@@ -19,7 +19,7 @@ public class ProgressBarDetermine {
     public ArrayList getProgressbarType(String date){
         LocalDate formattedDate = LocalDate.parse(date, this.pattern);
         long noOfDaysBetween = ChronoUnit.DAYS.between(formattedDate, this.today);
-        int maxLengthOfYear = 1095;
+        int maxLengthOfYear = 3000;
         int width = (int) (noOfDaysBetween*100/maxLengthOfYear);
         ArrayList list = new ArrayList<>();
 
