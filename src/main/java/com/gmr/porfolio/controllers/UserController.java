@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -28,43 +29,52 @@ public class UserController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addUser(@RequestBody User u) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
-        String passw = Encrypt.generateStrongPasswordHash(u.getPassword());
+    public ResponseEntity<Void> addUser(@RequestBody User u) {
+        String passw = null;
+        try {
+            passw = Encrypt.generateStrongPasswordHash(u.getPassword());
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            System.out.println(e);
+        }
         u = new User.Builder().setName(u.getName())
                 .setLastname(u.getLastname())
                 .setPassword(passw)
                 .setEmail(u.getEmail())
                 .setNickname(u.getNickname())
                 .build();
-        userdao.addUser(u);
+        try {
+            userdao.addUser(u);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return new ResponseEntity(HttpStatus.CREATED);
 
     }
 
     @GetMapping("/data")
-    public ResponseEntity<User> getUser(@RequestHeader(value = "Authorization") String token) {
+    public ResponseEntity getUser(@RequestHeader(value = "Authorization") String token) {
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)) {
             return new ResponseEntity<User>(userdao.getUser(parseInt(id)), HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>("no se han moficado los datos", HttpStatus.NOT_MODIFIED);
 
     }
 
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Void> deleteUser(@RequestHeader(value = "Authorization") String token) {
+    public ResponseEntity deleteUser(@RequestHeader(value = "Authorization") String token) {
 
         String id = jwt.getKey(token);
         if (jwt.verifyToken(token)) {
             userdao.deleteUser(parseInt(id));
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity(HttpStatus.NOT_MODIFIED);
     }
 
 
     @PatchMapping(value = "/update")
-    public ResponseEntity<Void> updateUser(@RequestBody User u,
+    public ResponseEntity updateUser(@RequestBody User u,
                                            @RequestHeader(value = "Authorization") String token) throws NoSuchAlgorithmException, InvalidKeySpecException {
         // recibe el id del usuario y los datos nuevos del usuario
         String id = jwt.getKey(token);
@@ -84,6 +94,6 @@ public class UserController {
         if (list != null) {
             return new ResponseEntity<>(list, HttpStatus.OK);
         }
-        return new ResponseEntity<>(list, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.NOT_FOUND);
     }
 }
