@@ -1,7 +1,6 @@
 package com.gmr.porfolio.models;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
