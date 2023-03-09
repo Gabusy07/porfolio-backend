@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @CrossOrigin(origins="${host}", maxAge = 3600)
 
 @RestController
@@ -51,8 +53,15 @@ public class ProjectController {
                               @PathVariable int id,
                               @RequestHeader(value = "Authorization") String token){
         if(jwt.verifyToken(token)){
-            projectdao.editProject(id, p);
-            return new ResponseEntity("item modified", HttpStatus.OK);
+            Optional<Project> projectOptional = projectdao.editProject(id, p);
+            if(projectOptional.isPresent()){
+                System.out.println(projectOptional.get());
+                return null;
+                //return new ResponseEntity(projectOptional.get(), HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity("item not modified", HttpStatus.NOT_MODIFIED);
+            }
         }
         return new ResponseEntity<>("token not valid", HttpStatus.UNAUTHORIZED);
     };
