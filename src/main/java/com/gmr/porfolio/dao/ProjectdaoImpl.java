@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -27,16 +28,16 @@ public class ProjectdaoImpl implements Projectdao{
     }
 
     @Override
-    public void editProject(int id, Project editedProject) {
+    public Optional<Project> editProject(int id, Project editedProject) {
         Project p = em.find(Project.class, id);
-        p = new Project.Builder().setId(p.getId()).setTitle(p.getTitle())
-                        .setDescription(p.getDescription())
-                        .setLanguage(p.getLanguage())
-                        .setImage(p.getImage())
-                        .setLinkProject(p.getLinkProject())
-                        .setEnabled(p.getEnabled())
+        p = new Project.Builder().setId(p.getId()).setTitle(editedProject.getTitle())
+                        .setDescription(editedProject.getDescription())
+                        .setLanguage(editedProject.getLanguage())
+                        .setImage(editedProject.getImage())
+                        .setLinkProject(editedProject.getLinkProject())
+                        .setEnabled(editedProject.getEnabled())
                                         .build();
-        em.merge(p);
+        return Optional.of(em.merge(p));
     }
 
     @Override

@@ -35,8 +35,8 @@ public class KnowledgeDAOImpl implements KnowledgeDAO{
         System.out.println(width+3);
         Knowledge knowledge = em.find(Knowledge.class, id);
         knowledge = new Knowledge.Builder().setId(knowledge.getId())
-                        .setName(knowledge.getName())
-                        .setDate(knowledge.getDate())
+                        .setName(editedKnw.getName())
+                        .setDate(editedKnw.getDate())
                        .setProgressbar(pb)
                        .setWidth(width).build();
         em.merge(knowledge);
