@@ -27,7 +27,8 @@ public class KnowledgeController {
     public void addKnowledge(@RequestBody Knowledge knw) throws ParseException {
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = knw.getDate();
-        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
+        System.out.println(knw.getProgressbar());
+        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date, knw.getProgressbar());
         Knowledge newKnw = new Knowledge.Builder().setId(knw.getId()).setName(knw.getName())
                         .setDate(knw.getDate()).setProgressbar((String) progressbarAndWidth.get(0))
                         .setWidth((Integer) progressbarAndWidth.get(1)).build();

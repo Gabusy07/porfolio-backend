@@ -27,7 +27,7 @@ public class KnowledgeDAOImpl implements KnowledgeDAO{
     public void editKnowledge(int id, Knowledge editedKnw) {
         //recoge la fecha y opera con ella para devolver el tipo de progressbar y width para la DDBB
         String date = editedKnw.getDate();
-        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date);
+        ArrayList progressbarAndWidth = new ProgressBarDetermine().getProgressbarType(date, editedKnw.getProgressbar());
         System.out.println(progressbarAndWidth);
 
         String pb = (String) progressbarAndWidth.get(0);
