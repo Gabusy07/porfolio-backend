@@ -26,7 +26,7 @@ public class Project {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "link_project", unique = true)
+    @Column(name = "link_project")
     private String linkProject;
 
 
